@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { StudentsController } from './students.controller';
-import { StudentsService } from './students.service';
+import { StudentsController } from './users.controller';
+import { StudentsService } from './users.service';
 
 export class Student {
   id: number ;
@@ -8,7 +8,8 @@ export class Student {
   lastName: string ;
   email: string ;
   password: string ;
-  score: number ;  
+  score: number ;
+  role: 'STUDENT' | 'ADMIN' ;
 }
 
 @Module({

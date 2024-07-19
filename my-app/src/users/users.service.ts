@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Student } from './student.module' ;
+import { Student } from './user.module' ;
 
 @Injectable()
 export class StudentsService {
@@ -20,7 +20,7 @@ export class StudentsService {
         }
     }
 
-    createStudent(firstName: string, lastName: string, email: string, password: string): Student {
+    createStudent(firstName: string, lastName: string, email: string, password: string, role: 'ADMIN' | 'STUDENT'): Student {
         const id = this.students.length + 1 ;
         const student: Student = {
             id,
@@ -29,6 +29,7 @@ export class StudentsService {
             email,
             password,
             score: 0,
+            role,
         } ;
 
         this.students.push(student) ;

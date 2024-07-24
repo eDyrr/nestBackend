@@ -27,8 +27,9 @@ export class ModulesService {
     }
 
     deleteModule(id: number): void {
-        this.modules.filter((module) => module.id !== id) ;
+        const module: _Module = this.getModuleById(id) ;
+        if(module) {
+            this.modules.filter((module) => module.id !== id) ;
+        }
     }
-
-    
 }

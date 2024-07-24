@@ -2,14 +2,17 @@ import { Module } from '@nestjs/common';
 import { StudentsController } from './users.controller';
 import { StudentsService } from './users.service';
 
-export class Student {
+export class User {
   id: number ;
   firstName: string ;
   lastName: string ;
   email: string ;
   password: string ;
+  role: 'ADMIN' ;
+}
+
+export class Student extends User {
   score: number ;
-  role: 'STUDENT' | 'ADMIN' ;
 }
 
 @Module({

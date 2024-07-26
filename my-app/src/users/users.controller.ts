@@ -1,27 +1,29 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { StudentsService } from './users.service';
-import { Student } from './user.module' ;
+import { UsersService } from './users.service';
+import { User } from './entity/user.entity' ;
+import { CreateUserDto } from './dto/create-user.dto' ;
 
-@Controller('students')
-export class StudentsController {
-    constructor(private studentsService: StudentsService) {}
+@Controller('users')
+export class UsersController {
+    constructor(private readonly usersService: UsersService) {}
+
     @Post()
-    createStudent(@Body() createdStudent:{firstname, lastname, email, password}): Student {
-        return this.studentsService.createStudent(createdStudent.firstname, createdStudent.lastname, createdStudent.email, createdStudent.password) ;
+    createUser(@Body() createUserDto: CreateUserDto) {
+        return this.usersService.createUser(createUserDto) ;
     }
 
     @Get()
-    getAllStudents(): Student[] {
-        return this.studentsService.getAllStudents() ;
+    getAllUsers() {
+        return this.usersService.findAll() ;
     }
 
-    @Get('id')
-    getStudentById(@Param('id') id: number): Student {
-        return this.studentsService.getStudentById(id) ;
+    @Get(':id')
+    findUser(@Param('id') id: string) {
+        return this.usersService.findOne(+id) ;
     }
 
-    @Delete('id')
-    deleteStudent(@Param('id') id: number): void {
-        this.studentsService.deleteStudent(id) ;
+    @Delete(':id')
+    removeUser(@Param('id') id: string) {
+        return this.usersService.remove(+id) ;
     }
 }

@@ -7,7 +7,7 @@ import { ChaptersModule } from './chapters/chapters.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { Admin } from './admins/admin.entity';
-import { Student } from './students/student.entity';
+import { Student } from './students/entity/student.entity';
 
 @Module({
   imports: [

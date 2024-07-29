@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
-import { Student } from "./../../students/student.entity";
+import { Student } from "../../students/entity/student.entity";
 import { Admin } from './../../admins/admin.entity' ;
 
 export enum Role {

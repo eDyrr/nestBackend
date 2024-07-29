@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm' ;
-import { Chapter } from './../chapters/chapter.entity' ;
+import { Chapter } from './../../chapters/entity/chapter.entity' ;
 
 @Entity()
 export class Module {

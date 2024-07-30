@@ -6,7 +6,7 @@ import { SpecialtiesModule } from './specialties/specialty.module';
 import { ChaptersModule } from './chapters/chapters.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
-import { Admin } from './admins/admin.entity';
+import { Admin } from './admins/entity/admin.entity';
 import { Student } from './students/entity/student.entity';
 
 @Module({

@@ -12,4 +12,6 @@ export class Enrollment {
 
     @OneToMany(() => Student, student => student.enrollment)
     student: Student ;
+    @OneToMany(() => Specialty, specialty => specialty.enrollment)
+    specialty: Specialty ;
 }

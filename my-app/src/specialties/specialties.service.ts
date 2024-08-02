@@ -1,15 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { Specialty } from './specialty.module' ;
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Specialties } from './entity/specialty.entity';
 @Injectable()
 export class SpecialtiesService {
-    private specialties: Specialty[] = [] ;
+    constructor(
+        @InjectRepository(Specialty)
+        private readonly specialtiesService: Repository<Specialty>,
+    ) {}
 
-    getAllSpecialties(): Specialty[] {
-        return this.specialties ;
+    getAll(): string[] {
+        return Object.values(Specialties) as string[] ;
     }
 
-    getSpecialtyById(id: number): Specialty {
-        return this.specialties.find((specialty) => specialty.id === id) ;
+    async getSpecialtyById(id: number): Promise<string> {
+        try {
+            const specialty: Specialty = await this.specialtiesService.findOneBy({ id }) ;
+            return specialty.name ;
+        }  catch(error) {
+            console.error(error) ;
+        }
     }
 }

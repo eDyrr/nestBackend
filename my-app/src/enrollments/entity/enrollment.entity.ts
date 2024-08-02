@@ -1,9 +1,15 @@
-import { Entity, PrimaryColumn, OneToMany } from 'typeorm' ;
-import { Student } from '../../students/entity/student.entity' ;
-import { Specialty } from '../../specialties/specialty.entity'
+import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm' ;
+import { Specialty } from '../../specialties/entity/specialty.entity'
+import { Student } from 'src/students/entity/student.entity';
 
-@Entity()
+@Entity('enrollment')
 export class Enrollment {
-    @OneToMany(() => Specialty, specialty => specialty.enrollment)
+    
+    @ManyToOne(() => Specialty, specialty => specialty.enrollment)
+    @JoinColumn({ name: 'specialty_id'})
     specialty: Specialty ;
+
+    @ManyToOne(() => Student, student => student.enrollment)
+    @JoinColumn({ name: 'student_id'})
+    student: Student ;
 }

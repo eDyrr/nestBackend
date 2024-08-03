@@ -3,17 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from './entity/student.entity';
 import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { error } from 'console';
-import { Specialties } from 'src/specialties/entity/specialty.entity';
-import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
+import { EnrollmentsService } from 'src/enrollments/enrollments.service';
+import { SpecialtiesService } from 'src/specialties/specialties.service';
 
 @Injectable()
 export class StudentsService {
     constructor(
         @InjectRepository(Student)
         private readonly studentRepository: Repository<Student>,
-        @InjectRepository(Enrollment)
-        private readonly enrollmentRepository: Repository<Enrollment>,
+        private readonly enrollmentsService: EnrollmentsService,
+        private readonly specialtiesService: SpecialtiesService,
     ) {}
 
     async createStudent(studentDTO: CreateStudentDto): Promise<Student> {
@@ -51,10 +50,13 @@ export class StudentsService {
         }
     }
 
-    async getSpecialty(id: number): Specialties {
+    async getSpecialty(id: number): Promise<string> {
         try {
-            const student = await this.findById(id) ;
-            return student.
+            const specialtyId = await this.enrollmentsService.getSpecialtyId(id) ;
+            const specialty = await this.specialtiesService.getSpecialtyById(specialtyId) ;
+            return specialty ;
+        } catch(error) {
+            console.error(error) ;
         }
     }
 }

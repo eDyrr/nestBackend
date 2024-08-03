@@ -50,6 +50,27 @@ export class StudentsService {
         }
     }
 
+    async addScore(id: number, score: number): Promise<void> {
+        try {
+            
+            const student: Student = await this.findById(id) ;
+
+            if(!student) {
+                throw new Error('student with ${id} isnt found') ;
+            }
+
+            student.score += score ;
+
+            await this.studentRepository.save(student) ;
+
+        } catch(error) {
+
+            console.error(error) ;
+            throw new Error('failed to add score') ;
+
+        }
+    }
+
     async getSpecialty(id: number): Promise<string> {
         try {
             const specialtyId = await this.enrollmentsService.getSpecialtyId(id) ;

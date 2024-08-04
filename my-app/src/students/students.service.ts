@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
+import { Specialties, Specialty } from 'src/specialties/entity/specialty.entity';
 
 @Injectable()
 export class StudentsService {
@@ -19,7 +20,12 @@ export class StudentsService {
         const student: Student = new Student() ;
 
         student.subscriber = studentDTO.subscriber ;
-        student.enrollment.specialty.name = studentDTO.specialty ;
+
+        const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty) ;
+        if(!specialty) {
+            throw new Error("${studentDTO.specialty} not found") ;
+        }
+
 
         return this.studentRepository.save(student) ;
     }
@@ -33,11 +39,18 @@ export class StudentsService {
     }
 
     async subscribe(id: number): Promise<void> {
-        return this.findById(id).then((student: Student) => {
+        try {
+            const student: Student = await this.findById(id) ;
+            
+            if(!student) {
+                throw new Error('student with ${id} not found') ;
+            }
+
             student.subscriber = true ;
-        }).catch((error) => {
-            console.error("student not found", error) ;
-        }) ;
+            this.studentRepository.save(student) ;
+        } catch(error) {
+            throw new Error(error) ;
+        }
     }
 
     async getScore(id: number): Promise<number> {
@@ -52,7 +65,7 @@ export class StudentsService {
 
     async addScore(id: number, score: number): Promise<void> {
         try {
-            
+
             const student: Student = await this.findById(id) ;
 
             if(!student) {
@@ -71,13 +84,23 @@ export class StudentsService {
         }
     }
 
-    async getSpecialty(id: number): Promise<string> {
+    async getSpecialty(id: number): Promise<Specialty> {
         try {
             const specialtyId = await this.enrollmentsService.getSpecialtyId(id) ;
+            
+            if(!specialtyId) {
+                throw new Error('specialty ID not found') ;
+            }
+
             const specialty = await this.specialtiesService.getSpecialtyById(specialtyId) ;
+
+            if(!specialty) {
+                throw new Error('specialty not found') ;
+            }
+
             return specialty ;
         } catch(error) {
-            console.error(error) ;
+            throw new Error(error) ;
         }
     }
 }

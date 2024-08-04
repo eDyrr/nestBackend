@@ -5,7 +5,7 @@ import { Student } from 'src/students/entity/student.entity';
 @Entity('enrollment')
 export class Enrollment {
     
-    @ManyToOne(() => Specialty, specialty => specialty.enrollment)
+    @ManyToOne(() => Specialty, specialty => specialty.enrollments)
     @JoinColumn({ name: 'specialty_id'})
     specialty: Specialty ;
 

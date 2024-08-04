@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, ManyToMany, ManyToOne } from 'typeorm' ;
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm' ;
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
 
 export enum Specialties {
@@ -22,5 +22,5 @@ export class Specialty {
 
     @OneToMany(() => Enrollment, enrollment => enrollment.specialty)
     @JoinColumn()
-    enrollment: Enrollment[] ;
+    enrollments: Enrollment[] ;
 }

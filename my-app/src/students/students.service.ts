@@ -53,6 +53,21 @@ export class StudentsService {
         }
     }
 
+    async unsubscribe(id: number): Promise<void> {
+        try {
+            const student: Student = await this.findById(id) ;
+
+            if(!student) {
+                throw new Error('student with ID: ${id} not found') ;
+            }
+
+            student.subscriber = false ;
+            this.studentRepository.save(student) ;
+        } catch(error) {
+            console.error(error.message) ;
+        }
+    }
+
     async getScore(id: number): Promise<number> {
         try {
             const student = await this.findById(id) ;

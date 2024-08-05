@@ -1,28 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { _Module } from './modules.module';
-import { Chapter } from 'src/chapters/chapters.module';
+import { Module } from './entity/module.entity';
+import { Chapter } from '../chapters/entity/chapter.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ModulesService {
-    modules: _Module[] = [] ;
+    constructor(
+        @InjectRepository(Module)
+        private readonly modulesRepository: Repository<Module>,
+    ) {}
 
-    getAllModules(): _Module[] {
-        return this.modules ;
+    getAllModules(): Promise<Module[]> {
+        return this. ;
     }
 
-    getModuleById(id: number): _Module {
-        return this.modules.find((module) => module.id === id) ;
+    getModuleById(id: number): Module {
+        return this.modulesRepository.find(id) ;
     }
 
-    createModule(name: string, roadmap: Chapter[]): _Module {
-        const id: number = this.modules.length + 1 ;
-        const module: _Module = {
+    createModule(name: string, roadmap: Chapter[]): Module {
+        const module: Module = {
             id,
             name,
             roadmap
         } ;
 
-        this.modules.push(module) ;
+        this.modulesRepository.save(module) ;
         return module ;
     }
 

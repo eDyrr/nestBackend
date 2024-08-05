@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Chapter } from './chapters.module';
+import { Chapter } from './entity/chapter.entity';
 
 @Injectable()
 export class ChaptersService {

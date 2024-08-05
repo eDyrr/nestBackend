@@ -12,28 +12,12 @@ export class ModulesService {
     ) {}
 
     getAllModules(): Promise<Module[]> {
-        return this. ;
+        return this.modulesRepository.find() ;
     }
 
-    getModuleById(id: number): Module {
-        return this.modulesRepository.find(id) ;
+    getModuleById(id: number): Promise<Module> {
+        return this.modulesRepository.findOneBy({id}) ;
     }
 
-    createModule(name: string, roadmap: Chapter[]): Module {
-        const module: Module = {
-            id,
-            name,
-            roadmap
-        } ;
-
-        this.modulesRepository.save(module) ;
-        return module ;
-    }
-
-    deleteModule(id: number): void {
-        const module: _Module = this.getModuleById(id) ;
-        if(module) {
-            this.modules.filter((module) => module.id !== id) ;
-        }
-    }
+    createModule()
 }

@@ -6,6 +6,7 @@ import { CreateStudentDto } from './dto/create-student.dto';
 import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
 import { Specialties, Specialty } from 'src/specialties/entity/specialty.entity';
+import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
 
 @Injectable()
 export class StudentsService {
@@ -26,7 +27,8 @@ export class StudentsService {
             throw new Error("${studentDTO.specialty} not found") ;
         }
 
-
+        this.enrollmentsService.enrollStudent(student.id, specialty.id) ;
+        
         return this.studentRepository.save(student) ;
     }
 

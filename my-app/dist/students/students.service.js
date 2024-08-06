@@ -27,10 +27,11 @@ let StudentsService = class StudentsService {
     }
     async createStudent(studentDTO) {
         const student = new student_entity_1.Student();
+        const specialty = studentDTO.specialty;
         student.subscriber = studentDTO.subscriber;
         const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty);
         if (!specialty) {
-            throw new Error("${studentDTO.specialty} not found");
+            throw new Error('${studentDTO.specialty} not found');
         }
         return this.studentRepository.save(student);
     }

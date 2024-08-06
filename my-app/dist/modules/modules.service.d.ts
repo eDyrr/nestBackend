@@ -1,9 +1,11 @@
-import { _Module } from './modules.module';
-import { Chapter } from 'src/chapters/chapters.module';
+import { Module } from './entity/module.entity';
+import { Chapter } from '../chapters/entity/chapter.entity';
+import { Repository } from 'typeorm';
 export declare class ModulesService {
-    modules: _Module[];
-    getAllModules(): _Module[];
-    getModuleById(id: number): _Module;
-    createModule(name: string, roadmap: Chapter[]): _Module;
+    private readonly modulesRepository;
+    constructor(modulesRepository: Repository<Module>);
+    getAllModules(): Promise<Module[]>;
+    getModuleById(id: number): Module;
+    createModule(name: string, roadmap: Chapter[]): Module;
     deleteModule(id: number): void;
 }

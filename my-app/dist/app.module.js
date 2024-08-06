@@ -10,11 +10,11 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const users_module_1 = require("./users/users.module");
+const students_module_1 = require("./students/students.module");
 const specialty_module_1 = require("./specialties/specialty.module");
 const chapters_module_1 = require("./chapters/chapters.module");
 const typeorm_1 = require("@nestjs/typeorm");
-const user_entity_1 = require("./users/user.entity");
+const user_entity_1 = require("./users/entity/user.entity");
 const admin_entity_1 = require("./admins/entity/admin.entity");
 const student_entity_1 = require("./students/entity/student.entity");
 let AppModule = class AppModule {
@@ -33,7 +33,7 @@ exports.AppModule = AppModule = __decorate([
                 entities: [user_entity_1.User, admin_entity_1.Admin, student_entity_1.Student],
                 synchronize: true,
             }),
-            users_module_1.StudentsModule, specialty_module_1.SpecialtiesModule, chapters_module_1.ChaptersModule
+            students_module_1.StudentsModule, specialty_module_1.SpecialtiesModule, chapters_module_1.ChaptersModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

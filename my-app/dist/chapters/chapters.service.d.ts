@@ -1,4 +1,4 @@
-import { Chapter } from './chapters.module';
+import { Chapter } from './entity/chapter.entity';
 export declare class ChaptersService {
     chapters: Chapter[];
     getAllChapter(): Chapter[];

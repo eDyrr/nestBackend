@@ -11,6 +11,7 @@ export class ModulesService {
     private readonly modulesRepository: Repository<Module>,
   ) {}
 
+<<<<<<< HEAD
   getAllModules(): Promise<Module[]> {
       return this. ;
   }
@@ -36,4 +37,15 @@ export class ModulesService {
       this.modules.filter((module) => module.id !== id);
     }
   }
+=======
+    getAllModules(): Promise<Module[]> {
+        return this.modulesRepository.find() ;
+    }
+
+    getModuleById(id: number): Promise<Module> {
+        return this.modulesRepository.findOneBy({id}) ;
+    }
+
+    createModule()
+>>>>>>> cee178d8bce615c542e72b6becb82a987d822d77
 }

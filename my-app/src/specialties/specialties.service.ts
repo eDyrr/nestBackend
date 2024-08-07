@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Specialties } from './entity/specialty.entity';
 import { Specialty } from './entity/specialty.entity';
+import { CreateSpecialtyDTO } from './dto/create-specialty.dto';
 
 @Injectable()
 export class SpecialtiesService {
@@ -10,6 +11,24 @@ export class SpecialtiesService {
         @InjectRepository(Specialty)
         private readonly specialtiesRepository: Repository<Specialty>,
     ) {}
+
+    addSpecialty(specialtyName: string) {
+        if(!(specialtyName in Specialties)) {
+            (Specialties as any)[specialtyName] = specialtyName ;
+        }
+    }
+
+    async createSpecialty(createdSpecialty: CreateSpecialtyDTO): Promise<Specialty> {
+        try {
+            const specialty: Specialty = this.specialtiesRepository.create() ;
+            specialty.name = createdSpecialty.name ;
+            this.addSpecialty(createdSpecialty.name) ;
+            this.specialtiesRepository.save(specialty) ;
+            return specialty ;
+        } catch(error) {
+            throw new Error(error.message) ;
+        }
+    }
 
     getAll(): string[] {
         return Object.values(Specialties) as string[] ;

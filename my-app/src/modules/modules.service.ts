@@ -3,6 +3,7 @@ import { Module } from './entity/module.entity';
 import { Chapter } from '../chapters/entity/chapter.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateModuleDTO } from './dto/create-module.dto';
 
 @Injectable()
 export class ModulesService {
@@ -11,33 +12,6 @@ export class ModulesService {
     private readonly modulesRepository: Repository<Module>,
   ) {}
 
-<<<<<<< HEAD
-  getAllModules(): Promise<Module[]> {
-      return this. ;
-  }
-
-  getModuleById(id: number): Module {
-    return this.modulesRepository.find(id);
-  }
-
-  createModule(name: string, roadmap: Chapter[]): Module {
-    const module: Module = {
-      id,
-      name,
-      roadmap,
-    };
-
-    this.modulesRepository.save(module);
-    return module;
-  }
-
-  deleteModule(id: number) {
-    const module: _Module = this.getModuleById(id);
-    if (module) {
-      this.modules.filter((module) => module.id !== id);
-    }
-  }
-=======
     getAllModules(): Promise<Module[]> {
         return this.modulesRepository.find() ;
     }
@@ -46,6 +20,30 @@ export class ModulesService {
         return this.modulesRepository.findOneBy({id}) ;
     }
 
-    createModule()
->>>>>>> cee178d8bce615c542e72b6becb82a987d822d77
+    async createModule(createdModule: CreateModuleDTO): Promise<Module> {
+      try {
+        const module: Module = this.modulesRepository.create() ;
+        module.name = createdModule.name ;
+        module.specialty = createdModule.specialty ;
+        return this.modulesRepository.save(module) ;
+      } catch(error) {
+        throw new Error(error.message) ;
+      }
+    }
+
+    async addChapter(module_id: number, chapter: Chapter): Promise<Module> {
+      try {
+        const module: Module = await this.getModuleById(module_id) ;
+
+        if(!module) {
+          throw new Error("module with ID: ${module_id} not found") ;
+        }
+        chapter.module = module ;
+        module.chapters.push(chapter) ;
+        return this.modulesRepository.save(module) ;
+
+      } catch(error) {
+        throw new Error(error.message) ;
+      }
+    }
 }

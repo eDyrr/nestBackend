@@ -1,5 +1,6 @@
-import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm' ;
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm' ;
 import { Chapter } from './../../chapters/entity/chapter.entity' ;
+import { Specialty } from 'src/specialties/entity/specialty.entity';
 
 @Entity()
 export class Module {
@@ -9,9 +10,10 @@ export class Module {
     @Column()
     name: string ;
 
-    @Column()
-    specialty_id: number ;
-    
+    @ManyToOne(() => Specialty, specialty => specialty.modules)
+    @JoinColumn()
+    specialty: Specialty ;
+
     @OneToMany(() => Chapter, chapter => chapter.module)
     chapters: Chapter[] ;
 }

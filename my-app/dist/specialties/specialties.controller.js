@@ -17,7 +17,7 @@ let SpecialtiesController = class SpecialtiesController {
         this.specialtiesService = specialtiesService;
     }
     getAllSpecialties() {
-        return this.specialtiesService.getAllSpecialties();
+        return this.specialtiesService.getAll();
     }
 };
 exports.SpecialtiesController = SpecialtiesController;

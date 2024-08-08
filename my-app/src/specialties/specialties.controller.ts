@@ -7,7 +7,7 @@ export class SpecialtiesController {
     constructor(private specialtiesService: SpecialtiesService) {}
 
     @Get()
-    getAllSpecialties(): Specialty[] {
-        return this.specialtiesService.getAllSpecialties() ;
+    getAllSpecialties(): string[] {
+        return this.specialtiesService.getAll() ;
     }
 }

@@ -1,36 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Chapter } from './entity/chapter.entity';
+import { CreateChapterDto } from './dto/create-chapter.dto';
+import { Module } from 'src/modules/entity/module.entity';
+import { ModulesService } from 'src/modules/modules.service';
 
 @Injectable()
 export class ChaptersService {
-    chapters: Chapter[] = [] ;
+    constructor(
+        @InjectRepository(Chapter)
+        private readonly chaptersService: Repository<Chapter>,
+        private readonly modulesService: ModulesService
+    ) {}
 
-    getAllChapter(): Chapter[] {
-        return this.chapters ;
+    findAll(): Promise<Chapter[]> {
+        return this.chaptersService.find() ;
     }
 
-    getChapterById(id: number): Chapter {
-        return this.chapters.find((chapter) => chapter.id === id) ;
+    findById(id: number): Promise<Chapter> {
+        return this.chaptersService.findOneBy({ id }) ;
     }
 
-    createChapter(order: number, title: string, summary: string): Chapter {
-        const id: number = this.chapters.length + 1 ;
+    async createChapter(createdChapter: CreateChapterDto, module_id: number): Promise<Chapter> {
+        try {
+            const module: Module = await this.modulesService.getModuleById(module_id) ;
+            if (!module) {
+                throw new Error(`module with ID: ${module_id} not found`) ;
+            }
 
-        const chapter: Chapter = {
-            id,
-            order,
-            title,
-            summary
-        } ;
+            const chapter: Chapter = this.chaptersService.create() ;
 
-        this.chapters.push(chapter) ;
-        return chapter ;
-    }
+            chapter.title = createdChapter.title ;
+            chapter.is_paid = createdChapter.paid ;
+            chapter.order = createdChapter.order ;
 
-    deleteChapter(id: number): void {
-        const _chapter: Chapter = this.getChapterById(id) ;
-        if(_chapter) {
-            this.chapters = this.chapters.filter((chapter) => chapter.id !== id) ;
+            chapter.module = module ;
+
+            return this.chaptersService.save(chapter) ;
+        } catch(error) {
+            throw new Error(error.message) ;
         }
     }
 }

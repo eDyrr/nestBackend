@@ -9,24 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateChapterDto = void 0;
+exports.CreateModuleDTO = void 0;
 const class_validator_1 = require("class-validator");
-class CreateChapterDto {
+const specialty_entity_1 = require("../../specialties/entity/specialty.entity");
+class CreateModuleDTO {
 }
-exports.CreateChapterDto = CreateChapterDto;
+exports.CreateModuleDTO = CreateModuleDTO;
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], CreateChapterDto.prototype, "paid", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateChapterDto.prototype, "title", void 0);
+], CreateModuleDTO.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateChapterDto.prototype, "order", void 0);
-//# sourceMappingURL=create-chapter.dto.js.map
+    __metadata("design:type", specialty_entity_1.Specialty)
+], CreateModuleDTO.prototype, "specialty", void 0);
+//# sourceMappingURL=create-module.dto.js.map

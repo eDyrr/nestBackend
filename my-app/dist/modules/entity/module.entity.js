@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Module = void 0;
 const typeorm_1 = require("typeorm");
 const chapter_entity_1 = require("./../../chapters/entity/chapter.entity");
+const specialty_entity_1 = require("../../specialties/entity/specialty.entity");
 let Module = class Module {
 };
 exports.Module = Module;
@@ -24,9 +25,10 @@ __decorate([
     __metadata("design:type", String)
 ], Module.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Module.prototype, "specialty_id", void 0);
+    (0, typeorm_1.ManyToOne)(() => specialty_entity_1.Specialty, specialty => specialty.modules),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", specialty_entity_1.Specialty)
+], Module.prototype, "specialty", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => chapter_entity_1.Chapter, chapter => chapter.module),
     __metadata("design:type", Array)

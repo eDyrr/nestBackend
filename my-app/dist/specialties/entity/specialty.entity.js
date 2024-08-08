@@ -12,17 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Specialty = exports.Specialties = void 0;
 const typeorm_1 = require("typeorm");
 const enrollment_entity_1 = require("../../enrollments/entity/enrollment.entity");
-var Specialties;
-(function (Specialties) {
-    Specialties[Specialties["MATH"] = 0] = "MATH";
-    Specialties[Specialties["SCIENCE"] = 1] = "SCIENCE";
-    Specialties[Specialties["CIVIL-ENGINEERING"] = 2] = "CIVIL-ENGINEERING";
-    Specialties[Specialties["ELECTRICAL-ENGINEERING"] = 3] = "ELECTRICAL-ENGINEERING";
-    Specialties[Specialties["CHEMICAL-ENGINEERING"] = 4] = "CHEMICAL-ENGINEERING";
-    Specialties[Specialties["LANGUAGES"] = 5] = "LANGUAGES";
-    Specialties[Specialties["ECONOMICS"] = 6] = "ECONOMICS";
-    Specialties[Specialties["LITERATURE & PHILOSOPHY"] = 7] = "LITERATURE & PHILOSOPHY";
-})(Specialties || (exports.Specialties = Specialties = {}));
+const module_entity_1 = require("../../modules/entity/module.entity");
+exports.Specialties = {
+    MATH: 'MATH',
+    SCIENCE: 'SCIENCE',
+    CIVIL_ENGINEERING: 'CIVIL-ENGINEERING',
+    ELECTRICAL_ENGINEERING: 'ELECTRICAL-ENGINEERING',
+    CHEMICAL_ENGINEERING: 'CHEMICAL-ENGINEERING',
+    LANGUAGES: 'LANGUAGES',
+    ECONOMICS: 'ECONOMICS',
+    LITERATURE_PHILOSOPHY: 'LITERATURE & PHILOSOPHY',
+};
 let Specialty = class Specialty {
 };
 exports.Specialty = Specialty;
@@ -31,14 +31,21 @@ __decorate([
     __metadata("design:type", Number)
 ], Specialty.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
+    (0, typeorm_1.Column)({
+        type: 'enum',
+        enum: exports.Specialties,
+    }),
+    __metadata("design:type", String)
 ], Specialty.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => enrollment_entity_1.Enrollment, enrollment => enrollment.specialty),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Array)
 ], Specialty.prototype, "enrollments", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => module_entity_1.Module, module => module.specialty),
+    __metadata("design:type", Array)
+], Specialty.prototype, "modules", void 0);
 exports.Specialty = Specialty = __decorate([
     (0, typeorm_1.Entity)('Specialty')
 ], Specialty);

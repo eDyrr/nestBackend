@@ -1,16 +1,19 @@
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
-export declare enum Specialties {
-    'MATH' = 0,
-    'SCIENCE' = 1,
-    'CIVIL-ENGINEERING' = 2,
-    'ELECTRICAL-ENGINEERING' = 3,
-    'CHEMICAL-ENGINEERING' = 4,
-    'LANGUAGES' = 5,
-    'ECONOMICS' = 6,
-    'LITERATURE & PHILOSOPHY' = 7
-}
+import { Module } from 'src/modules/entity/module.entity';
+export declare const Specialties: {
+    readonly MATH: "MATH";
+    readonly SCIENCE: "SCIENCE";
+    readonly CIVIL_ENGINEERING: "CIVIL-ENGINEERING";
+    readonly ELECTRICAL_ENGINEERING: "ELECTRICAL-ENGINEERING";
+    readonly CHEMICAL_ENGINEERING: "CHEMICAL-ENGINEERING";
+    readonly LANGUAGES: "LANGUAGES";
+    readonly ECONOMICS: "ECONOMICS";
+    readonly LITERATURE_PHILOSOPHY: "LITERATURE & PHILOSOPHY";
+};
+export type Specialties = typeof Specialties[keyof typeof Specialties];
 export declare class Specialty {
     id: number;
     name: Specialties;
     enrollments: Enrollment[];
+    modules: Module[];
 }

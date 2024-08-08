@@ -22,24 +22,34 @@ let ModulesService = class ModulesService {
         this.modulesRepository = modulesRepository;
     }
     getAllModules() {
-        return this.;
+        return this.modulesRepository.find();
     }
     getModuleById(id) {
-        return this.modulesRepository.find(id);
+        return this.modulesRepository.findOneBy({ id });
     }
-    createModule(name, roadmap) {
-        const module = {
-            id,
-            name,
-            roadmap,
-        };
-        this.modulesRepository.save(module);
-        return module;
+    async createModule(createdModule) {
+        try {
+            const module = this.modulesRepository.create();
+            module.name = createdModule.name;
+            module.specialty = createdModule.specialty;
+            return this.modulesRepository.save(module);
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
     }
-    deleteModule(id) {
-        const module = this.getModuleById(id);
-        if (module) {
-            this.modules.filter((module) => module.id !== id);
+    async addChapter(module_id, chapter) {
+        try {
+            const module = await this.getModuleById(module_id);
+            if (!module) {
+                throw new Error(`module with ID: ${module_id} not found`);
+            }
+            chapter.module = module;
+            module.chapters.push(chapter);
+            return this.modulesRepository.save(module);
+        }
+        catch (error) {
+            throw new Error(error.message);
         }
     }
 };

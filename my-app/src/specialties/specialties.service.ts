@@ -21,7 +21,7 @@ export class SpecialtiesService {
     async createSpecialty(createdSpecialty: CreateSpecialtyDTO): Promise<Specialty> {
         try {
             const specialty: Specialty = this.specialtiesRepository.create() ;
-            specialty.name = createdSpecialty.name ;
+            specialty.name = (Specialties as any)[createdSpecialty.name] ;
             this.addSpecialty(createdSpecialty.name) ;
             this.specialtiesRepository.save(specialty) ;
             return specialty ;
@@ -48,7 +48,7 @@ export class SpecialtiesService {
             const specialty: Specialty = await this.specialtiesRepository.findOne({ where: { name }}) ;
             
             if(!specialty) {
-                throw new Error('specialty with the ${name} not found') ;
+                throw new Error(`specialty with the ${name} not found`) ;
             }
 
             return specialty ;

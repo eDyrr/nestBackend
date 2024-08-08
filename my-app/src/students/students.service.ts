@@ -5,15 +5,8 @@ import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
-<<<<<<< HEAD
-import {
-  Specialties,
-  Specialty,
-} from 'src/specialties/entity/specialty.entity';
-=======
 import { Specialties, Specialty } from 'src/specialties/entity/specialty.entity';
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
->>>>>>> cee178d8bce615c542e72b6becb82a987d822d77
 
 @Injectable()
 export class StudentsService {
@@ -27,7 +20,6 @@ export class StudentsService {
   async createStudent(studentDTO: CreateStudentDto): Promise<Student> {
     const student: Student = new Student();
 
-<<<<<<< HEAD
 
      const  specialty  = studentDTO.specialty  ;
 
@@ -38,11 +30,6 @@ export class StudentsService {
     );
     if (!specialty) {
       throw new Error('${studentDTO.specialty} not found');
-=======
-        this.enrollmentsService.enrollStudent(student.id, specialty.id) ;
-        
-        return this.studentRepository.save(student) ;
->>>>>>> cee178d8bce615c542e72b6becb82a987d822d77
     }
 
     return this.studentRepository.save(student);
@@ -61,7 +48,7 @@ export class StudentsService {
       const student: Student = await this.findById(id);
 
       if (!student) {
-        throw new Error('student with ${id} not found');
+        throw new Error(`student with ${id} not found`);
       }
 
       student.subscriber = true;
@@ -76,7 +63,7 @@ export class StudentsService {
       const student: Student = await this.findById(id);
 
       if (!student) {
-        throw new Error('student with ID: ${id} not found');
+        throw new Error(`student with ID: ${id} not found`);
       }
 
       student.subscriber = false;
@@ -101,7 +88,7 @@ export class StudentsService {
       const student: Student = await this.findById(id);
 
       if (!student) {
-        throw new Error('student with ${id} isnt found');
+        throw new Error(`student with ${id} isnt found`);
       }
 
       student.score += score;

@@ -36,7 +36,7 @@ export class ModulesService {
         const module: Module = await this.getModuleById(module_id) ;
 
         if(!module) {
-          throw new Error("module with ID: ${module_id} not found") ;
+          throw new Error(`module with ID: ${module_id} not found`) ;
         }
         chapter.module = module ;
         module.chapters.push(chapter) ;

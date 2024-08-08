@@ -27,12 +27,12 @@ let StudentsService = class StudentsService {
     }
     async createStudent(studentDTO) {
         const student = new student_entity_1.Student();
-        const specialty = studentDTO.specialty;
         student.subscriber = studentDTO.subscriber;
         const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty);
         if (!specialty) {
             throw new Error('${studentDTO.specialty} not found');
         }
+        student.specialty = studentDTO.specialty ;
         return this.studentRepository.save(student);
     }
     async findAll() {
@@ -45,7 +45,7 @@ let StudentsService = class StudentsService {
         try {
             const student = await this.findById(id);
             if (!student) {
-                throw new Error('student with ${id} not found');
+                throw new Error(`student with ${id} not found`);
             }
             student.subscriber = true;
             this.studentRepository.save(student);
@@ -58,7 +58,7 @@ let StudentsService = class StudentsService {
         try {
             const student = await this.findById(id);
             if (!student) {
-                throw new Error('student with ID: ${id} not found');
+                throw new Error(`student with ID: ${id} not found`);
             }
             student.subscriber = false;
             this.studentRepository.save(student);
@@ -81,7 +81,7 @@ let StudentsService = class StudentsService {
         try {
             const student = await this.findById(id);
             if (!student) {
-                throw new Error('student with ${id} isnt found');
+                throw new Error(`student with ${id} isnt found`);
             }
             student.score += score;
             await this.studentRepository.save(student);

@@ -37,13 +37,13 @@ export class EnrollmentsService {
             const student = await this.studentsService.findById(student_id) ;
             
             if(!student) {
-                throw new Error('student with ID: ${student_id} not found') ;
+                throw new Error(`student with ID: ${student_id} not found`) ;
             }
             
             const specialty = await this.specialtiesService.getSpecialtyById(specialty_id) ;
             
             if(!specialty) {
-                throw new Error("specialty with ID: ${specialty_id} not found") ;
+                throw new Error(`specialty with ID: ${specialty_id} not found`) ;
             }
 
             const enrollment: Enrollment = new Enrollment() ;

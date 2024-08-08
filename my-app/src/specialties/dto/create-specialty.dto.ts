@@ -1,8 +1,7 @@
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
-import { Specialties } from "../entity/specialty.entity";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateSpecialtyDTO {
     @IsNotEmpty()
-    @IsEnum(Specialties)
-    name: Specialties ;
+    @IsString()
+    name: string ;
 }

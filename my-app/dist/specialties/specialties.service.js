@@ -22,6 +22,23 @@ let SpecialtiesService = class SpecialtiesService {
     constructor(specialtiesRepository) {
         this.specialtiesRepository = specialtiesRepository;
     }
+    addSpecialty(specialtyName) {
+        if (!(specialtyName in specialty_entity_1.Specialties)) {
+            specialty_entity_1.Specialties[specialtyName] = specialtyName;
+        }
+    }
+    async createSpecialty(createdSpecialty) {
+        try {
+            const specialty = this.specialtiesRepository.create();
+            specialty.name = specialty_entity_1.Specialties[createdSpecialty.name];
+            this.addSpecialty(createdSpecialty.name);
+            this.specialtiesRepository.save(specialty);
+            return specialty;
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }
     getAll() {
         return Object.values(specialty_entity_1.Specialties);
     }
@@ -38,7 +55,7 @@ let SpecialtiesService = class SpecialtiesService {
         try {
             const specialty = await this.specialtiesRepository.findOne({ where: { name } });
             if (!specialty) {
-                throw new Error('specialty with the ${name} not found');
+                throw new Error(`specialty with the ${name} not found`);
             }
             return specialty;
         }

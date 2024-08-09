@@ -26,7 +26,7 @@ let StudentsService = class StudentsService {
         this.specialtiesService = specialtiesService;
     }
     async createStudent(studentDTO) {
-        const student = new student_entity_1.Student();
+        const student = this.studentRepository.create();
         const specialty = studentDTO.specialty;
         student.subscriber = studentDTO.subscriber;
         const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty);

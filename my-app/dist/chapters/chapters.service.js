@@ -19,15 +19,15 @@ const typeorm_2 = require("typeorm");
 const chapter_entity_1 = require("./entity/chapter.entity");
 const modules_service_1 = require("../modules/modules.service");
 let ChaptersService = class ChaptersService {
-    constructor(chaptersService, modulesService) {
-        this.chaptersService = chaptersService;
+    constructor(chaptersRepository, modulesService) {
+        this.chaptersRepository = chaptersRepository;
         this.modulesService = modulesService;
     }
     findAll() {
-        return this.chaptersService.find();
+        return this.chaptersRepository.find();
     }
     findById(id) {
-        return this.chaptersService.findOneBy({ id });
+        return this.chaptersRepository.findOneBy({ id });
     }
     async createChapter(createdChapter, module_id) {
         try {
@@ -35,12 +35,12 @@ let ChaptersService = class ChaptersService {
             if (!module) {
                 throw new Error(`module with ID: ${module_id} not found`);
             }
-            const chapter = this.chaptersService.create();
+            const chapter = this.chaptersRepository.create();
             chapter.title = createdChapter.title;
             chapter.is_paid = createdChapter.paid;
             chapter.order = createdChapter.order;
             chapter.module = module;
-            return this.chaptersService.save(chapter);
+            return this.chaptersRepository.save(chapter);
         }
         catch (error) {
             throw new Error(error.message);

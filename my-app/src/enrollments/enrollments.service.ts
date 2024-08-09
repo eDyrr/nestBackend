@@ -4,6 +4,7 @@ import { Enrollment } from "./entity/enrollment.entity";
 import { Repository } from "typeorm";
 import { StudentsService } from "src/students/students.service";
 import { SpecialtiesService } from "src/specialties/specialties.service";
+import { Specialty } from "src/specialties/entity/specialty.entity";
 
 @Injectable()
 export class EnrollmentsService {
@@ -14,7 +15,7 @@ export class EnrollmentsService {
         private readonly specialtiesService: SpecialtiesService,
     ) {}
 
-    async getSpecialtyId(studentId: number): Promise<number> {
+    async getSpecialtyId(studentId: number): Promise<Specialty> {
         try {
             const enrollment = await this.enrollmentRepository.findOne({ 
                 where: { student: { id: studentId } },
@@ -22,7 +23,7 @@ export class EnrollmentsService {
             });
             
             if (enrollment && enrollment.specialty) {
-                return enrollment.specialty.id;
+                return enrollment.specialty ;
             } else {
                 throw new Error('Enrollment or Specialty not found for this student');
             }

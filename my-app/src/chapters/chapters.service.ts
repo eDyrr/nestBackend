@@ -10,16 +10,16 @@ import { ModulesService } from 'src/modules/modules.service';
 export class ChaptersService {
     constructor(
         @InjectRepository(Chapter)
-        private readonly chaptersService: Repository<Chapter>,
+        private readonly chaptersRepository: Repository<Chapter>,
         private readonly modulesService: ModulesService
     ) {}
 
     findAll(): Promise<Chapter[]> {
-        return this.chaptersService.find() ;
+        return this.chaptersRepository.find() ;
     }
 
     findById(id: number): Promise<Chapter> {
-        return this.chaptersService.findOneBy({ id }) ;
+        return this.chaptersRepository.findOneBy({ id }) ;
     }
 
     async createChapter(createdChapter: CreateChapterDto, module_id: number): Promise<Chapter> {
@@ -29,7 +29,7 @@ export class ChaptersService {
                 throw new Error(`module with ID: ${module_id} not found`) ;
             }
 
-            const chapter: Chapter = this.chaptersService.create() ;
+            const chapter: Chapter = this.chaptersRepository.create() ;
 
             chapter.title = createdChapter.title ;
             chapter.is_paid = createdChapter.paid ;
@@ -37,7 +37,22 @@ export class ChaptersService {
 
             chapter.module = module ;
 
-            return this.chaptersService.save(chapter) ;
+            return this.chaptersRepository.save(chapter) ;
+        } catch(error) {
+            throw new Error(error.message) ;
+        }
+    }
+
+    async deleteChapter(chapter_id: number) {
+        try {
+            const chapter = await this.findById(chapter_id) ;
+
+            if(!chapter) {
+                throw new Error(`chapter with ID: ${chapter_id} not found`) ;
+            }
+
+            this.chaptersRepository.delete(chapter) ;
+            
         } catch(error) {
             throw new Error(error.message) ;
         }

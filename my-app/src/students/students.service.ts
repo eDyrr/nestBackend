@@ -18,7 +18,8 @@ export class StudentsService {
   ) {}
 
   async createStudent(studentDTO: CreateStudentDto): Promise<Student> {
-    const student: Student = new Student();
+    
+    const student: Student = this.studentRepository.create() ;
 
 
      const  specialty  = studentDTO.specialty  ;

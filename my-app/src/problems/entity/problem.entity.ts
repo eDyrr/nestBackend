@@ -1,7 +1,8 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Solution } from "./../solutions/solution.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Solution } from "../../solutions/entity/solution.entity";
+import { Module } from "src/modules/entity/module.entity";
 
-enum Difficulty {
+export enum Difficulty {
     easy,
     medium,
     hard
@@ -13,9 +14,6 @@ export class Problem {
     id: number ;
     
     @Column()
-    module_id: number ;
-
-    @Column()
     score: number ;
 
     @Column({
@@ -23,6 +21,10 @@ export class Problem {
         enum: Difficulty
     })
     difficulty: Difficulty ;
+
+    @ManyToOne(() => Module, module => module.problems)
+    @JoinColumn()
+    module: Module ;
 
     @OneToOne(() => Solution, solution => solution.problem)
     @JoinColumn()

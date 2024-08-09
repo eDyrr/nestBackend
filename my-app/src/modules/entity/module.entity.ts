@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm' ;
 import { Chapter } from './../../chapters/entity/chapter.entity' ;
 import { Specialty } from 'src/specialties/entity/specialty.entity';
+import { Problem } from 'src/problems/entity/problem.entity';
 
 @Entity()
 export class Module {
@@ -16,4 +17,7 @@ export class Module {
 
     @OneToMany(() => Chapter, chapter => chapter.module)
     chapters: Chapter[] ;
+
+    @OneToMany(() => Problem, problem => problem.module)
+    problems: Problem[] ;
 }

@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, Validate } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from "class-validator";
 import { Difficulty } from "../entity/problem.entity";
 import { Module } from "src/modules/entity/module.entity";
 import { Solution } from "src/solutions/entity/solution.entity";

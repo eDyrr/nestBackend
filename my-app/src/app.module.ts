@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entity/user.entity';
 import { Admin } from './admins/entity/admin.entity';
 import { Student } from './students/entity/student.entity';
+import { ProgressModule } from './progress/progress.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { Student } from './students/entity/student.entity';
       entities: [User, Admin, Student],
       synchronize: true,
     }),
-    StudentsModule, SpecialtiesModule, ChaptersModule],
+    StudentsModule, SpecialtiesModule, ChaptersModule, ProgressModule],
   controllers: [AppController],
   providers: [AppService],
 })

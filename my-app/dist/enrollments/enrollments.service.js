@@ -32,7 +32,7 @@ let EnrollmentsService = class EnrollmentsService {
                 relations: ['specialty', 'student'],
             });
             if (enrollment && enrollment.specialty) {
-                return enrollment.specialty.id;
+                return enrollment.specialty;
             }
             else {
                 throw new Error('Enrollment or Specialty not found for this student');

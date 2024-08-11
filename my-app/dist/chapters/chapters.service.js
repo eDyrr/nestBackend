@@ -46,6 +46,18 @@ let ChaptersService = class ChaptersService {
             throw new Error(error.message);
         }
     }
+    async deleteChapter(chapter_id) {
+        try {
+            const chapter = await this.findById(chapter_id);
+            if (!chapter) {
+                throw new Error(`chapter with ID: ${chapter_id} not found`);
+            }
+            this.chaptersRepository.delete(chapter);
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }
 };
 exports.ChaptersService = ChaptersService;
 exports.ChaptersService = ChaptersService = __decorate([

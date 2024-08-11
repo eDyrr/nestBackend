@@ -9,24 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Solution = void 0;
+exports.SolutionsService = void 0;
+const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
-const problem_entity_1 = require("./../problems/problem.entity");
-(0, typeorm_1.Entity)();
-class Solution {
-}
-exports.Solution = Solution;
-__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], Solution.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Solution.prototype, "problem_id", void 0);
-__decorate([
-    (0, typeorm_1.OneToOne)(() => problem_entity_1.Problem, problem => problem.solution),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", problem_entity_1.Problem)
-], Solution.prototype, "problem", void 0);
-//# sourceMappingURL=solution.entity.js.map
+let SolutionsService = class SolutionsService {
+    constructor(solutionsRepository) {
+        this.solutionsRepository = solutionsRepository;
+    }
+};
+exports.SolutionsService = SolutionsService;
+exports.SolutionsService = SolutionsService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeorm_1.Repository])
+], SolutionsService);
+//# sourceMappingURL=solutions.service.js.map

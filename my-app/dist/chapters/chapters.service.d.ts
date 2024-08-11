@@ -9,4 +9,5 @@ export declare class ChaptersService {
     findAll(): Promise<Chapter[]>;
     findById(id: number): Promise<Chapter>;
     createChapter(createdChapter: CreateChapterDto, module_id: number): Promise<Chapter>;
+    deleteChapter(chapter_id: number): Promise<void>;
 }

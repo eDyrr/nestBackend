@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Specialties } from './entity/specialty.entity';
 import { Specialty } from './entity/specialty.entity';
 import { CreateSpecialtyDTO } from './dto/create-specialty.dto';
+import { Module } from 'src/modules/entity/module.entity';
 
 @Injectable()
 export class SpecialtiesService {
@@ -52,6 +53,19 @@ export class SpecialtiesService {
             }
 
             return specialty ;
+        } catch(error) {
+            throw new Error(error.message) ;
+        }
+    }
+
+    async getModules(specialty_id: number): Promise<Module[]> {
+        try {
+            const specialty: Specialty = await this.getSpecialtyById(specialty_id) ;
+            if(!specialty) {
+                throw new Error(`specialty with ID: ${specialty_id} not found`) ;
+            }
+
+            return specialty.modules ;
         } catch(error) {
             throw new Error(error.message) ;
         }

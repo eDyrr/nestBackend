@@ -121,4 +121,23 @@ export class StudentsService {
       throw new Error(error);
     }
   }
+
+  async getProgress(student_id: number): Promise<number> {
+    try {
+      const student: Student = await this.findById(student_id) ;
+      if(!student) {
+        throw new Error(`student with ID: ${student_id} not found`) ;
+      }
+      
+      let overall: number = 0 ;
+
+      for(let progress of student.progress) {
+        overall += progress.progress ;
+      }
+
+      return 
+    } catch(error) {
+      throw new Error(error.message) ;
+    }
+  }
 }

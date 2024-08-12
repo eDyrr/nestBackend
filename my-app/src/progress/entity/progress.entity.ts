@@ -7,7 +7,7 @@ export class Progress {
     @PrimaryGeneratedColumn()
     id: number ;
 
-    @Column()
+    @Column({ default: 0 })
     progress: number ;
 
     @ManyToOne(() => Student, student => student.progress)

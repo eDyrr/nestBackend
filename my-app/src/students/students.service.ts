@@ -7,6 +7,7 @@ import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
 import { Specialties, Specialty } from 'src/specialties/entity/specialty.entity';
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
+import { spec } from 'node:test/reporters';
 
 @Injectable()
 export class StudentsService {
@@ -18,22 +19,23 @@ export class StudentsService {
   ) {}
 
   async createStudent(studentDTO: CreateStudentDto): Promise<Student> {
-    
-    const student: Student = this.studentRepository.create() ;
+    try {
+      const student = this.studentRepository.create() ;
 
+      student.subscriber = studentDTO.subscriber ;
 
-     const specialty  = studentDTO.specialty  ;
+      const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty) ;
 
-    student.subscriber = studentDTO.subscriber;
+      if(!specialty) {
+        throw new Error(`${studentDTO.specialty} not found`) ;
+      }
 
-    const specialty = await this.specialtiesService.getSpecialtyByName(
-      studentDTO.specialty,
-    );
-    if (!specialty) {
-      throw new Error('${studentDTO.specialty} not found');
+      await this.enrollmentsService.enrollStudent(student.user.id, specialty.id) ;
+      
+      return await this.studentRepository.save(student) ;
+    } catch(error) {
+      throw new Error(error.message) ;
     }
-
-    return await this.studentRepository.save(student);
   }
 
   async findAll(): Promise<Student[]> {

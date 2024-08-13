@@ -8,7 +8,7 @@ export class Student extends User{
     @Column()
     subscriber: boolean ;
     
-    @Column()
+    @Column({ default: 0 })
     score: number ;
 
     @OneToOne(() => User, user => user.student)

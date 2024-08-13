@@ -22,7 +22,7 @@ export class StudentsService {
     const student: Student = this.studentRepository.create() ;
 
 
-     const  specialty  = studentDTO.specialty  ;
+     const specialty  = studentDTO.specialty  ;
 
     student.subscriber = studentDTO.subscriber;
 
@@ -33,7 +33,7 @@ export class StudentsService {
       throw new Error('${studentDTO.specialty} not found');
     }
 
-    return this.studentRepository.save(student);
+    return await this.studentRepository.save(student);
   }
 
   async findAll(): Promise<Student[]> {
@@ -101,24 +101,19 @@ export class StudentsService {
     }
   }
 
-  async getSpecialty(id: number): Promise<Specialty> {
+  async getSpecialty(student_id: number): Promise<Specialty> {
     try {
-      const specialtyId = await this.enrollmentsService.getSpecialtyId(id);
+      const student = await this.findById(student_id) ;
 
-      if (!specialtyId) {
-        throw new Error('specialty ID not found');
+      if(!student) {
+        throw new Error(`student with ID: ${student_id} not found`) ;
       }
 
-      const specialty =
-        await this.specialtiesService.getSpecialtyById(specialtyId);
+      const specialty = await this.enrollmentsService.getSpecialtyId(student_id) ;
 
-      if (!specialty) {
-        throw new Error('specialty not found');
-      }
-
-      return specialty;
-    } catch (error) {
-      throw new Error(error);
+      return await this.specialtiesService.getSpecialtyById(specialty.id) ;
+    } catch(error) {
+      throw new Error(error.message) ;
     }
   }
 

@@ -1,5 +1,5 @@
 import { Entity, Column, OneToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm' ;
-import { Problem } from "../../problems/problem.entity" ;
+import { Problem } from "../../problems/entity/problem.entity" ;
 
 Entity()
 export class Solution {

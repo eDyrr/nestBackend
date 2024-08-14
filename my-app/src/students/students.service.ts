@@ -5,9 +5,8 @@ import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
-import { Specialties, Specialty } from 'src/specialties/entity/specialty.entity';
-import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
-import { spec } from 'node:test/reporters';
+import { Specialty } from 'src/specialties/entity/specialty.entity';
+
 
 @Injectable()
 export class StudentsService {

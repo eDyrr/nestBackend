@@ -4,13 +4,13 @@ import { Repository } from 'typeorm';
 import { Specialties } from './entity/specialty.entity';
 import { Specialty } from './entity/specialty.entity';
 import { CreateSpecialtyDTO } from './dto/create-specialty.dto';
-import { Module } from 'src/modules/entity/module.entity';
+import { studies } from 'src/modules/entity/module.entity';
 
 @Injectable()
 export class SpecialtiesService {
     constructor(
         @InjectRepository(Specialty)
-        private readonly specialtiesRepository: Repository<Specialty>,
+        private readonly specialtyRepository: Repository<Specialty>,
     ) {}
 
     addSpecialty(specialtyName: string) {
@@ -21,10 +21,10 @@ export class SpecialtiesService {
 
     async createSpecialty(createdSpecialty: CreateSpecialtyDTO): Promise<Specialty> {
         try {
-            const specialty: Specialty = this.specialtiesRepository.create() ;
+            const specialty: Specialty = this.specialtyRepository.create() ;
             specialty.name = (Specialties as any)[createdSpecialty.name] ;
             this.addSpecialty(createdSpecialty.name) ;
-            this.specialtiesRepository.save(specialty) ;
+            this.specialtyRepository.save(specialty) ;
             return specialty ;
         } catch(error) {
             throw new Error(error.message) ;
@@ -37,7 +37,7 @@ export class SpecialtiesService {
 
     async getSpecialtyById(id: number): Promise<Specialty> {
         try {
-            const specialty: Specialty = await this.specialtiesRepository.findOneBy({ id }) ;
+            const specialty: Specialty = await this.specialtyRepository.findOneBy({ id }) ;
             return specialty ;
         }  catch(error) {
             console.error(error) ;
@@ -46,7 +46,7 @@ export class SpecialtiesService {
 
     async getSpecialtyByName(name: Specialties): Promise<Specialty> {
         try {
-            const specialty: Specialty = await this.specialtiesRepository.findOne({ where: { name }}) ;
+            const specialty: Specialty = await this.specialtyRepository.findOne({ where: { name }}) ;
             
             if(!specialty) {
                 throw new Error(`specialty with the ${name} not found`) ;
@@ -58,7 +58,7 @@ export class SpecialtiesService {
         }
     }
 
-    async getModules(specialty_id: number): Promise<Module[]> {
+    async getModules(specialty_id: number): Promise<studies.Module[]> {
         try {
             const specialty: Specialty = await this.getSpecialtyById(specialty_id) ;
             if(!specialty) {

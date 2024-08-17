@@ -6,6 +6,6 @@ import { ProblemsService } from "src/problems/problems.service";
 @Injectable()
 export class SolutionsService {
     constructor(
-        private readonly solutionsRepository: Repository<Solution>,
+        private readonly solutionRepository: Repository<Solution>,
     ) {}
 }

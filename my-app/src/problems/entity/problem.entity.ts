@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { Solution } from "../../solutions/entity/solution.entity";
-import { Module } from "src/modules/entity/module.entity";
+import { studies } from "src/modules/entity/module.entity";
 
 export enum Difficulty {
     easy,
@@ -22,9 +22,9 @@ export class Problem {
     })
     difficulty: Difficulty ;
 
-    @ManyToOne(() => Module, module => module.problems)
+    @ManyToOne(() => studies.Module, module => module.problems)
     @JoinColumn()
-    module: Module ;
+    module: studies.Module ;
 
     @OneToOne(() => Solution, solution => solution.problem)
     @JoinColumn()

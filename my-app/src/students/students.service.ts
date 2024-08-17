@@ -21,6 +21,10 @@ export class StudentsService {
     try {
       const student = this.studentRepository.create() ;
 
+      student.email = studentDTO.email ;
+      student.firstName = studentDTO.first_name ;
+      student.lastName = studentDTO.last_name ;
+      student.password = studentDTO.password ;
       student.subscriber = studentDTO.subscriber ;
 
       const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty) ;
@@ -29,9 +33,11 @@ export class StudentsService {
         throw new Error(`${studentDTO.specialty} not found`) ;
       }
 
-      await this.enrollmentsService.enrollStudent(student.user.id, specialty.id) ;
+      const savedStudent = await this.studentRepository.save(student) ;
+
+      await this.enrollmentsService.enrollStudent(savedStudent.id, specialty.id) ;
       
-      return await this.studentRepository.save(student) ;
+      return savedStudent ;
     } catch(error) {
       throw new Error(error.message) ;
     }

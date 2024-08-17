@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Module } from './entity/module.entity';
+import { studies } from './entity/module.entity';
 import { Chapter } from '../chapters/entity/chapter.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -8,39 +8,39 @@ import { CreateModuleDTO } from './dto/create-module.dto';
 @Injectable()
 export class ModulesService {
   constructor(
-    @InjectRepository(Module)
-    private readonly modulesRepository: Repository<Module>,
+    @InjectRepository(studies.Module)
+    private readonly moduleRepository: Repository<studies.Module>,
   ) {}
 
-    getAllModules(): Promise<Module[]> {
-        return this.modulesRepository.find() ;
+    getAllModules(): Promise<studies.Module[]> {
+        return this.moduleRepository.find() ;
     }
 
-    getModuleById(id: number): Promise<Module> {
-        return this.modulesRepository.findOneBy({id}) ;
+    getModuleById(id: number): Promise<studies.Module> {
+        return this.moduleRepository.findOneBy({id}) ;
     }
 
-    async createModule(createdModule: CreateModuleDTO): Promise<Module> {
+    async createModule(createdModule: CreateModuleDTO): Promise<studies.Module> {
       try {
-        const module: Module = this.modulesRepository.create() ;
+        const module: studies.Module = this.moduleRepository.create() ;
         module.name = createdModule.name ;
         module.specialty = createdModule.specialty ;
-        return this.modulesRepository.save(module) ;
+        return this.moduleRepository.save(module) ;
       } catch(error) {
         throw new Error(error.message) ;
       }
     }
 
-    async addChapter(module_id: number, chapter: Chapter): Promise<Module> {
+    async addChapter(module_id: number, chapter: Chapter): Promise<studies.Module> {
       try {
-        const module: Module = await this.getModuleById(module_id) ;
+        const module: studies.Module = await this.getModuleById(module_id) ;
 
         if(!module) {
           throw new Error(`module with ID: ${module_id} not found`) ;
         }
         chapter.module = module ;
         module.chapters.push(chapter) ;
-        return this.modulesRepository.save(module) ;
+        return this.moduleRepository.save(module) ;
 
       } catch(error) {
         throw new Error(error.message) ;

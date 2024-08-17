@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from 'typeorm' ;
-import { Module } from './../../modules/entity/module.entity' ;
+import { studies } from './../../modules/entity/module.entity' ;
 
 @Entity()
 export class Chapter {
@@ -15,7 +15,7 @@ export class Chapter {
     @Column()
     is_paid: boolean ;
 
-    @ManyToOne(() => Module, module => module.chapters)
+    @ManyToOne(() => studies.Module, module => module.chapters)
     @JoinColumn()
-    module: Module ;
+    module: studies.Module ;
 }

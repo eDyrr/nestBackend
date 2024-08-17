@@ -1,24 +1,21 @@
-import { Column, OneToOne, JoinColumn, Entity, OneToMany } from "typeorm";
+import { Column, OneToOne, JoinColumn, Entity, OneToMany, ChildEntity } from "typeorm";
 import { User } from './../../users/entity/user.entity'
 import { Enrollment } from "src/enrollments/entity/enrollment.entity";
 import { Progress } from "src/progress/entity/progress.entity";
 
-@Entity()
+@ChildEntity()
 export class Student extends User{
     @Column()
     subscriber: boolean ;
     
     @Column({ default: 0 })
-    score: number ;
-
-    @OneToOne(() => User, user => user.student)
-    @JoinColumn()
-    user: User ;
+    score: number ; 
     
-    @OneToOne(() => Enrollment, enrollment => enrollment.student)
+    @OneToOne(() => Enrollment, enrollment => enrollment.student, { cascade: ['remove']})
     @JoinColumn()
     enrollment: Enrollment ;
 
     @OneToMany(() => Progress, progress => progress.student)
+    @JoinColumn()
     progress: Progress[] ;
 }

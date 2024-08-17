@@ -2,9 +2,11 @@ import {
     IsBoolean,
     IsNotEmpty,
     IsNumber,
-    IsString
+    IsString,
+    ValidateNested
 } from 'class-validator'
-import { Module } from './../../modules/entity/module.entity' ;
+import { studies } from './../../modules/entity/module.entity' ;
+import { Type } from 'class-transformer';
 
 
 export class CreateChapterDto {
@@ -19,4 +21,8 @@ export class CreateChapterDto {
     @IsNotEmpty()
     @IsNumber()
     order: number ;
+
+    @ValidateNested()
+    @Type(() => studies.Module)
+    module: studies.Module ;
 }

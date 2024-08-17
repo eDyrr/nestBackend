@@ -3,33 +3,33 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Chapter } from './entity/chapter.entity';
 import { CreateChapterDto } from './dto/create-chapter.dto';
-import { Module } from 'src/modules/entity/module.entity';
+import { studies } from 'src/modules/entity/module.entity';
 import { ModulesService } from 'src/modules/modules.service';
 
 @Injectable()
 export class ChaptersService {
     constructor(
         @InjectRepository(Chapter)
-        private readonly chaptersRepository: Repository<Chapter>,
+        private readonly chapterRepository: Repository<Chapter>,
         private readonly modulesService: ModulesService
     ) {}
 
     findAll(): Promise<Chapter[]> {
-        return this.chaptersRepository.find() ;
+        return this.chapterRepository.find() ;
     }
 
     findById(id: number): Promise<Chapter> {
-        return this.chaptersRepository.findOneBy({ id }) ;
+        return this.chapterRepository.findOneBy({ id }) ;
     }
 
     async createChapter(createdChapter: CreateChapterDto, module_id: number): Promise<Chapter> {
         try {
-            const module: Module = await this.modulesService.getModuleById(module_id) ;
+            const module: studies.Module = await this.modulesService.getModuleById(module_id) ;
             if (!module) {
                 throw new Error(`module with ID: ${module_id} not found`) ;
             }
 
-            const chapter: Chapter = this.chaptersRepository.create() ;
+            const chapter: Chapter = this.chapterRepository.create() ;
 
             chapter.title = createdChapter.title ;
             chapter.is_paid = createdChapter.paid ;
@@ -37,7 +37,7 @@ export class ChaptersService {
 
             chapter.module = module ;
 
-            return this.chaptersRepository.save(chapter) ;
+            return this.chapterRepository.save(chapter) ;
         } catch(error) {
             throw new Error(error.message) ;
         }
@@ -51,7 +51,7 @@ export class ChaptersService {
                 throw new Error(`chapter with ID: ${chapter_id} not found`) ;
             }
 
-            this.chaptersRepository.delete(chapter) ;
+            this.chapterRepository.delete(chapter) ;
             
         } catch(error) {
             throw new Error(error.message) ;

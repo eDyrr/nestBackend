@@ -7,10 +7,10 @@ import { CreateUserDto } from './dto/create-user.dto' ;
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Post()
-    createUser(@Body() createUserDto: CreateUserDto) {
-        return this.usersService.createUser(createUserDto) ;
-    }
+    // @Post()
+    // createUser(@Body() createUserDto: CreateUserDto) {
+    //     return this.usersService.createUser(createUserDto) ;
+    // }
 
     @Get()
     getAllUsers() {
@@ -22,8 +22,8 @@ export class UsersController {
         return this.usersService.findOne(+id) ;
     }
 
-    @Delete(':id')
-    removeUser(@Param('id') id: string) {
-        return this.usersService.remove(+id) ;
-    }
+    // @Delete(':id')
+    // removeUser(@Param('id') id: string) {
+    //     return this.usersService.remove(+id) ;
+    // }
 }

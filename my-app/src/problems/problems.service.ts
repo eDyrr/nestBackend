@@ -8,31 +8,31 @@ import { Solution } from "src/solutions/entity/solution.entity";
 export class ProblemsService {
     constructor(
         @InjectRepository(Problem)
-        private readonly problemsRepository: Repository<Problem>
+        private readonly problemRepository: Repository<Problem>
     ) {}
 
     findAll(): Promise<Problem[]> {
-        return this.problemsRepository.find() ;
+        return this.problemRepository.find() ;
     }
 
     findById(problem_id: number): Promise<Problem> {
-        return this.problemsRepository.findOne({ where: { id: problem_id } });
+        return this.problemRepository.findOne({ where: { id: problem_id } });
     }
 
     findByDifficulty(difficulty: Difficulty): Promise<Problem[]> {
-        return this.problemsRepository.findBy({ difficulty: difficulty })
+        return this.problemRepository.findBy({ difficulty: difficulty })
     }
 
     async createProblem(createdProblem: ProblemDTO): Promise<Problem> {
         try {
-            const problem = this.problemsRepository.create() ;
+            const problem = this.problemRepository.create() ;
 
             problem.module = createdProblem.module ;
             problem.score = createdProblem.score ;
             problem.module = createdProblem.module ;
             problem.solution = createdProblem.solution ;
 
-            return this.problemsRepository.save(problem) ;
+            return this.problemRepository.save(problem) ;
         } catch(error) {
             throw new Error(error) ;
         }

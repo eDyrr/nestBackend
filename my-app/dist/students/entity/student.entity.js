@@ -13,6 +13,7 @@ exports.Student = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./../../users/entity/user.entity");
 const enrollment_entity_1 = require("../../enrollments/entity/enrollment.entity");
+const progress_entity_1 = require("../../progress/entity/progress.entity");
 let Student = class Student extends user_entity_1.User {
 };
 exports.Student = Student;
@@ -21,15 +22,20 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Student.prototype, "subscriber", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
 ], Student.prototype, "score", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => enrollment_entity_1.Enrollment, enrollment => enrollment.student),
+    (0, typeorm_1.OneToOne)(() => enrollment_entity_1.Enrollment, enrollment => enrollment.student, { cascade: ['remove'] }),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", enrollment_entity_1.Enrollment)
 ], Student.prototype, "enrollment", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => progress_entity_1.Progress, progress => progress.student),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", Array)
+], Student.prototype, "progress", void 0);
 exports.Student = Student = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.ChildEntity)()
 ], Student);
 //# sourceMappingURL=student.entity.js.map

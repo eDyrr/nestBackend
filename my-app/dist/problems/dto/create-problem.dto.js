@@ -31,8 +31,8 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.ValidateNested)(),
-    (0, class_transformer_1.Type)(() => module_entity_1.Module),
-    __metadata("design:type", module_entity_1.Module)
+    (0, class_transformer_1.Type)(() => module_entity_1.studies.Module),
+    __metadata("design:type", module_entity_1.studies.Module)
 ], ProblemDTO.prototype, "module", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),

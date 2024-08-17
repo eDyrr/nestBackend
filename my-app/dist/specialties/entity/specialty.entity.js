@@ -43,7 +43,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Specialty.prototype, "enrollments", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => module_entity_1.Module, module => module.specialty),
+    (0, typeorm_1.OneToMany)(() => module_entity_1.studies.Module, module => module.specialty),
     __metadata("design:type", Array)
 ], Specialty.prototype, "modules", void 0);
 exports.Specialty = Specialty = __decorate([

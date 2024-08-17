@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { Solution } from "./entity/solution.entity";
 export declare class SolutionsService {
-    private readonly solutionsRepository;
-    constructor(solutionsRepository: Repository<Solution>);
+    private readonly solutionRepository;
+    constructor(solutionRepository: Repository<Solution>);
 }

@@ -16,5 +16,6 @@ export declare class StudentsService {
     unsubscribe(id: number): Promise<void>;
     getScore(id: number): Promise<number>;
     addScore(id: number, score: number): Promise<void>;
-    getSpecialty(id: number): Promise<Specialty>;
+    getSpecialty(student_id: number): Promise<Specialty>;
+    getProgress(student_id: number): Promise<number>;
 }

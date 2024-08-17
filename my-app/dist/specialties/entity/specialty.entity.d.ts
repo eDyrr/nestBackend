@@ -1,5 +1,5 @@
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
-import { Module } from 'src/modules/entity/module.entity';
+import { studies } from 'src/modules/entity/module.entity';
 export declare const Specialties: {
     readonly MATH: "MATH";
     readonly SCIENCE: "SCIENCE";
@@ -15,5 +15,5 @@ export declare class Specialty {
     id: number;
     name: Specialties;
     enrollments: Enrollment[];
-    modules: Module[];
+    modules: studies.Module[];
 }

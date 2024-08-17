@@ -18,21 +18,21 @@ const module_entity_1 = require("./entity/module.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 let ModulesService = class ModulesService {
-    constructor(modulesRepository) {
-        this.modulesRepository = modulesRepository;
+    constructor(moduleRepository) {
+        this.moduleRepository = moduleRepository;
     }
     getAllModules() {
-        return this.modulesRepository.find();
+        return this.moduleRepository.find();
     }
     getModuleById(id) {
-        return this.modulesRepository.findOneBy({ id });
+        return this.moduleRepository.findOneBy({ id });
     }
     async createModule(createdModule) {
         try {
-            const module = this.modulesRepository.create();
+            const module = this.moduleRepository.create();
             module.name = createdModule.name;
             module.specialty = createdModule.specialty;
-            return this.modulesRepository.save(module);
+            return this.moduleRepository.save(module);
         }
         catch (error) {
             throw new Error(error.message);
@@ -46,7 +46,7 @@ let ModulesService = class ModulesService {
             }
             chapter.module = module;
             module.chapters.push(chapter);
-            return this.modulesRepository.save(module);
+            return this.moduleRepository.save(module);
         }
         catch (error) {
             throw new Error(error.message);
@@ -56,7 +56,7 @@ let ModulesService = class ModulesService {
 exports.ModulesService = ModulesService;
 exports.ModulesService = ModulesService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(module_entity_1.Module)),
+    __param(0, (0, typeorm_1.InjectRepository)(module_entity_1.studies.Module)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ModulesService);
 //# sourceMappingURL=modules.service.js.map

@@ -19,6 +19,10 @@ const user_entity_1 = require("../users/entity/user.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const util_1 = require("util");
+const students_service_1 = require("../students/students.service");
+const specialties_service_1 = require("../specialties/specialties.service");
+const create_student_dto_1 = require("../students/dto/create-student.dto");
+const enrollments_service_1 = require("../enrollments/enrollments.service");
 const scrypt = (0, util_1.promisify)(crypto_1.scrypt);
 var Roles;
 (function (Roles) {
@@ -26,29 +30,39 @@ var Roles;
     Roles["STUDENT"] = "STUDENT";
 })(Roles || (exports.Roles = Roles = {}));
 let Auth = class Auth {
-    constructor(usersRepo) {
-        this.usersRepo = usersRepo;
+    constructor(usersRepository, studentsService, specialtiesService, enrollmentsService) {
+        this.usersRepository = usersRepository;
+        this.studentsService = studentsService;
+        this.specialtiesService = specialtiesService;
+        this.enrollmentsService = enrollmentsService;
     }
-    async signUp(first_name, last_name, email, password, role, studnet, admin) {
+    async signUp(first_name, last_name, email, password, role, student = null, admin = null, specialty = null, subscribed = null) {
         const salt = (0, crypto_1.randomBytes)(8).toString('hex');
         const hash = (await scrypt(password, salt, 32));
         const newPassword = `${hash.toString('hex')}.${salt}`;
-        const newUser = this.usersRepo.create({
-            firstName: first_name,
-            lastName: last_name,
-            email: email,
-            password: newPassword,
-            role: null,
-        });
+        const newUser = this.usersRepository.create();
+        newUser.email = email;
+        newUser.firstName = first_name;
+        newUser.lastName = last_name;
+        newUser.password = newPassword;
+        if (role === Roles.STUDENT) {
+            var spec = await this.specialtiesService.getSpecialtyByName(specialty);
+            if (!spec) {
+                throw new Error(`specialty not found`);
+            }
+            const newStudent = new create_student_dto_1.CreateStudentDto();
+            newStudent.specialty = spec.name;
+            newStudent.subscriber = subscribed;
+            const createdStudent = await this.studentsService.createStudent(newStudent);
+            await this.enrollmentsService.enrollStudent(createdStudent.id, spec.id);
+        }
         if (!newUser) {
             throw new common_1.InternalServerErrorException('USER HAS NOT BEEN CREATED !!');
         }
-        else {
-            return newUser;
-        }
+        return await this.usersRepository.save(newUser);
     }
     async logIn(email, password) {
-        const foundUser = await this.usersRepo.findOne({ where: { email } });
+        const foundUser = await this.usersRepository.findOne({ where: { email } });
         if (!foundUser) {
             console.log('user not found');
             throw new common_1.NotFoundException("user dosn't exist in the data base . ");
@@ -67,6 +81,9 @@ exports.Auth = Auth;
 exports.Auth = Auth = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        students_service_1.StudentsService,
+        specialties_service_1.SpecialtiesService,
+        enrollments_service_1.EnrollmentsService])
 ], Auth);
 //# sourceMappingURL=auth.service.js.map

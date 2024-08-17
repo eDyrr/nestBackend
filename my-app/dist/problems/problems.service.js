@@ -18,26 +18,26 @@ const typeorm_1 = require("@nestjs/typeorm");
 const problem_entity_1 = require("./entity/problem.entity");
 const typeorm_2 = require("typeorm");
 let ProblemsService = class ProblemsService {
-    constructor(problemsRepository) {
-        this.problemsRepository = problemsRepository;
+    constructor(problemRepository) {
+        this.problemRepository = problemRepository;
     }
     findAll() {
-        return this.problemsRepository.find();
+        return this.problemRepository.find();
     }
     findById(problem_id) {
-        return this.problemsRepository.findOne({ where: { id: problem_id } });
+        return this.problemRepository.findOne({ where: { id: problem_id } });
     }
     findByDifficulty(difficulty) {
-        return this.problemsRepository.findBy({ difficulty: difficulty });
+        return this.problemRepository.findBy({ difficulty: difficulty });
     }
     async createProblem(createdProblem) {
         try {
-            const problem = this.problemsRepository.create();
+            const problem = this.problemRepository.create();
             problem.module = createdProblem.module;
             problem.score = createdProblem.score;
             problem.module = createdProblem.module;
             problem.solution = createdProblem.solution;
-            return this.problemsRepository.save(problem);
+            return this.problemRepository.save(problem);
         }
         catch (error) {
             throw new Error(error);

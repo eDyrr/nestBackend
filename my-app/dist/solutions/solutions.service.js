@@ -13,8 +13,8 @@ exports.SolutionsService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 let SolutionsService = class SolutionsService {
-    constructor(solutionsRepository) {
-        this.solutionsRepository = solutionsRepository;
+    constructor(solutionRepository) {
+        this.solutionRepository = solutionRepository;
     }
 };
 exports.SolutionsService = SolutionsService;

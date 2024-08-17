@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Solution = void 0;
 const typeorm_1 = require("typeorm");
-const problem_entity_1 = require("../../problems/problem.entity");
+const problem_entity_1 = require("../../problems/entity/problem.entity");
 (0, typeorm_1.Entity)();
 class Solution {
 }
@@ -24,6 +23,6 @@ __decorate([
 __decorate([
     (0, typeorm_1.OneToOne)(() => problem_entity_1.Problem, problem => problem.solution),
     (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", typeof (_a = typeof problem_entity_1.Problem !== "undefined" && problem_entity_1.Problem) === "function" ? _a : Object)
+    __metadata("design:type", problem_entity_1.Problem)
 ], Solution.prototype, "problem", void 0);
 //# sourceMappingURL=solution.entity.js.map

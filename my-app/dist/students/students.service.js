@@ -26,14 +26,24 @@ let StudentsService = class StudentsService {
         this.specialtiesService = specialtiesService;
     }
     async createStudent(studentDTO) {
-        const student = this.studentRepository.create();
-        const specialty = studentDTO.specialty;
-        student.subscriber = studentDTO.subscriber;
-        const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty);
-        if (!specialty) {
-            throw new Error('${studentDTO.specialty} not found');
+        try {
+            const student = this.studentRepository.create();
+            student.email = studentDTO.email;
+            student.firstName = studentDTO.first_name;
+            student.lastName = studentDTO.last_name;
+            student.password = studentDTO.password;
+            student.subscriber = studentDTO.subscriber;
+            const specialty = await this.specialtiesService.getSpecialtyByName(studentDTO.specialty);
+            if (!specialty) {
+                throw new Error(`${studentDTO.specialty} not found`);
+            }
+            const savedStudent = await this.studentRepository.save(student);
+            await this.enrollmentsService.enrollStudent(savedStudent.id, specialty.id);
+            return savedStudent;
         }
-        return this.studentRepository.save(student);
+        catch (error) {
+            throw new Error(error.message);
+        }
     }
     async findAll() {
         return await this.studentRepository.find();
@@ -91,20 +101,33 @@ let StudentsService = class StudentsService {
             throw new Error('failed to add score');
         }
     }
-    async getSpecialty(id) {
+    async getSpecialty(student_id) {
         try {
-            const specialtyId = await this.enrollmentsService.getSpecialtyId(id);
-            if (!specialtyId) {
-                throw new Error('specialty ID not found');
+            const student = await this.findById(student_id);
+            if (!student) {
+                throw new Error(`student with ID: ${student_id} not found`);
             }
-            const specialty = await this.specialtiesService.getSpecialtyById(specialtyId);
-            if (!specialty) {
-                throw new Error('specialty not found');
-            }
-            return specialty;
+            const specialty = await this.enrollmentsService.getSpecialtyId(student_id);
+            return await this.specialtiesService.getSpecialtyById(specialty.id);
         }
         catch (error) {
-            throw new Error(error);
+            throw new Error(error.message);
+        }
+    }
+    async getProgress(student_id) {
+        try {
+            const student = await this.findById(student_id);
+            if (!student) {
+                throw new Error(`student with ID: ${student_id} not found`);
+            }
+            let overall = 0;
+            for (let progress of student.progress) {
+                overall += progress.progress;
+            }
+            return;
+        }
+        catch (error) {
+            throw new Error(error.message);
         }
     }
 };

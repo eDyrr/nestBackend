@@ -19,15 +19,15 @@ const typeorm_2 = require("typeorm");
 const chapter_entity_1 = require("./entity/chapter.entity");
 const modules_service_1 = require("../modules/modules.service");
 let ChaptersService = class ChaptersService {
-    constructor(chaptersRepository, modulesService) {
-        this.chaptersRepository = chaptersRepository;
+    constructor(chapterRepository, modulesService) {
+        this.chapterRepository = chapterRepository;
         this.modulesService = modulesService;
     }
     findAll() {
-        return this.chaptersRepository.find();
+        return this.chapterRepository.find();
     }
     findById(id) {
-        return this.chaptersRepository.findOneBy({ id });
+        return this.chapterRepository.findOneBy({ id });
     }
     async createChapter(createdChapter, module_id) {
         try {
@@ -35,12 +35,12 @@ let ChaptersService = class ChaptersService {
             if (!module) {
                 throw new Error(`module with ID: ${module_id} not found`);
             }
-            const chapter = this.chaptersRepository.create();
+            const chapter = this.chapterRepository.create();
             chapter.title = createdChapter.title;
             chapter.is_paid = createdChapter.paid;
             chapter.order = createdChapter.order;
             chapter.module = module;
-            return this.chaptersRepository.save(chapter);
+            return this.chapterRepository.save(chapter);
         }
         catch (error) {
             throw new Error(error.message);
@@ -52,7 +52,7 @@ let ChaptersService = class ChaptersService {
             if (!chapter) {
                 throw new Error(`chapter with ID: ${chapter_id} not found`);
             }
-            this.chaptersRepository.delete(chapter);
+            this.chapterRepository.delete(chapter);
         }
         catch (error) {
             throw new Error(error.message);

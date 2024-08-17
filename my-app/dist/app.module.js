@@ -17,6 +17,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("./users/entity/user.entity");
 const admin_entity_1 = require("./admins/entity/admin.entity");
 const student_entity_1 = require("./students/entity/student.entity");
+const progress_module_1 = require("./progress/progress.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -33,7 +34,7 @@ exports.AppModule = AppModule = __decorate([
                 entities: [user_entity_1.User, admin_entity_1.Admin, student_entity_1.Student],
                 synchronize: true,
             }),
-            students_module_1.StudentsModule, specialty_module_1.SpecialtiesModule, chapters_module_1.ChaptersModule
+            students_module_1.StudentsModule, specialty_module_1.SpecialtiesModule, chapters_module_1.ChaptersModule, progress_module_1.ProgressModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -19,8 +19,8 @@ const typeorm_2 = require("typeorm");
 const specialty_entity_1 = require("./entity/specialty.entity");
 const specialty_entity_2 = require("./entity/specialty.entity");
 let SpecialtiesService = class SpecialtiesService {
-    constructor(specialtiesRepository) {
-        this.specialtiesRepository = specialtiesRepository;
+    constructor(specialtyRepository) {
+        this.specialtyRepository = specialtyRepository;
     }
     addSpecialty(specialtyName) {
         if (!(specialtyName in specialty_entity_1.Specialties)) {
@@ -29,10 +29,10 @@ let SpecialtiesService = class SpecialtiesService {
     }
     async createSpecialty(createdSpecialty) {
         try {
-            const specialty = this.specialtiesRepository.create();
+            const specialty = this.specialtyRepository.create();
             specialty.name = specialty_entity_1.Specialties[createdSpecialty.name];
             this.addSpecialty(createdSpecialty.name);
-            this.specialtiesRepository.save(specialty);
+            this.specialtyRepository.save(specialty);
             return specialty;
         }
         catch (error) {
@@ -44,7 +44,7 @@ let SpecialtiesService = class SpecialtiesService {
     }
     async getSpecialtyById(id) {
         try {
-            const specialty = await this.specialtiesRepository.findOneBy({ id });
+            const specialty = await this.specialtyRepository.findOneBy({ id });
             return specialty;
         }
         catch (error) {
@@ -53,11 +53,23 @@ let SpecialtiesService = class SpecialtiesService {
     }
     async getSpecialtyByName(name) {
         try {
-            const specialty = await this.specialtiesRepository.findOne({ where: { name } });
+            const specialty = await this.specialtyRepository.findOne({ where: { name } });
             if (!specialty) {
                 throw new Error(`specialty with the ${name} not found`);
             }
             return specialty;
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }
+    async getModules(specialty_id) {
+        try {
+            const specialty = await this.getSpecialtyById(specialty_id);
+            if (!specialty) {
+                throw new Error(`specialty with ID: ${specialty_id} not found`);
+            }
+            return specialty.modules;
         }
         catch (error) {
             throw new Error(error.message);

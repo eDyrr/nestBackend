@@ -18,6 +18,10 @@ const user_entity_1 = require("./users/entity/user.entity");
 const admin_entity_1 = require("./admins/entity/admin.entity");
 const student_entity_1 = require("./students/entity/student.entity");
 const progress_module_1 = require("./progress/progress.module");
+const modules_module_1 = require("./modules/modules.module");
+const enrollments_module_1 = require("./enrollments/enrollments.module");
+const problems_module_1 = require("./problems/problems.module");
+const admins_module_1 = require("./admins/admins.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,7 +38,7 @@ exports.AppModule = AppModule = __decorate([
                 entities: [user_entity_1.User, admin_entity_1.Admin, student_entity_1.Student],
                 synchronize: true,
             }),
-            students_module_1.StudentsModule, specialty_module_1.SpecialtiesModule, chapters_module_1.ChaptersModule, progress_module_1.ProgressModule
+            students_module_1.StudentsModule, specialty_module_1.SpecialtiesModule, chapters_module_1.ChaptersModule, progress_module_1.ProgressModule, modules_module_1._ModulesModule, enrollments_module_1.EnrollmentsModule, problems_module_1.ProblemsModule, admins_module_1.AdminsModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

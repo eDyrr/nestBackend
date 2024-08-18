@@ -10,4 +10,4 @@ import { ChaptersModule } from 'src/chapters/chapters.module';
   providers: [ModulesService],
   controllers: [ModulesController]
 })
-export class ModulesModule {}
+export class _ModulesModule {}

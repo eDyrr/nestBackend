@@ -18,7 +18,7 @@ let ChaptersModule = class ChaptersModule {
 exports.ChaptersModule = ChaptersModule;
 exports.ChaptersModule = ChaptersModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([chapter_entity_1.Chapter]), (0, common_1.forwardRef)(() => modules_module_1.ModulesModule)],
+        imports: [typeorm_1.TypeOrmModule.forFeature([chapter_entity_1.Chapter]), (0, common_1.forwardRef)(() => modules_module_1._ModulesModule)],
         controllers: [chapters_controller_1.ChaptersController],
         providers: [chapters_service_1.ChaptersService]
     })

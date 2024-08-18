@@ -9,7 +9,10 @@ import { User } from './users/entity/user.entity';
 import { Admin } from './admins/entity/admin.entity';
 import { Student } from './students/entity/student.entity';
 import { ProgressModule } from './progress/progress.module';
-
+import { _ModulesModule } from './modules/modules.module';
+import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { ProblemsModule } from './problems/problems.module';
+import { AdminsModule } from './admins/admins.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,7 +25,7 @@ import { ProgressModule } from './progress/progress.module';
       entities: [User, Admin, Student],
       synchronize: true,
     }),
-    StudentsModule, SpecialtiesModule, ChaptersModule, ProgressModule],
+    StudentsModule, SpecialtiesModule, ChaptersModule, ProgressModule, _ModulesModule, EnrollmentsModule, ProblemsModule, AdminsModule],
   controllers: [AppController],
   providers: [AppService],
 })

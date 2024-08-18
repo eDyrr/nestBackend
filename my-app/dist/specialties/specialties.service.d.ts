@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { Specialties } from './entity/specialty.entity';
 import { Specialty } from './entity/specialty.entity';
 import { CreateSpecialtyDTO } from './dto/create-specialty.dto';
-import { studies } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/modules/entity/module.entity';
 export declare class SpecialtiesService {
     private readonly specialtyRepository;
     constructor(specialtyRepository: Repository<Specialty>);
@@ -11,5 +11,5 @@ export declare class SpecialtiesService {
     getAll(): string[];
     getSpecialtyById(id: number): Promise<Specialty>;
     getSpecialtyByName(name: Specialties): Promise<Specialty>;
-    getModules(specialty_id: number): Promise<studies.Module[]>;
+    getModules(specialty_id: number): Promise<_Module[]>;
 }

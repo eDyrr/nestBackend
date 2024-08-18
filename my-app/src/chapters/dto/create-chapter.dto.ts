@@ -5,7 +5,7 @@ import {
     IsString,
     ValidateNested
 } from 'class-validator'
-import { studies } from './../../modules/entity/module.entity' ;
+import { _Module } from './../../modules/entity/module.entity' ;
 import { Type } from 'class-transformer';
 
 
@@ -23,6 +23,6 @@ export class CreateChapterDto {
     order: number ;
 
     @ValidateNested()
-    @Type(() => studies.Module)
-    module: studies.Module ;
+    @Type(() => _Module)
+    module: _Module ;
 }

@@ -33,7 +33,7 @@ __decorate([
 ], CreateChapterDto.prototype, "order", void 0);
 __decorate([
     (0, class_validator_1.ValidateNested)(),
-    (0, class_transformer_1.Type)(() => module_entity_1.studies.Module),
-    __metadata("design:type", module_entity_1.studies.Module)
+    (0, class_transformer_1.Type)(() => module_entity_1._Module),
+    __metadata("design:type", module_entity_1._Module)
 ], CreateChapterDto.prototype, "module", void 0);
 //# sourceMappingURL=create-chapter.dto.js.map

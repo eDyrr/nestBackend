@@ -57,4 +57,4 @@ export class EnrollmentsService {
             throw new Error(error.message) ;
         }
     }
-}
+};

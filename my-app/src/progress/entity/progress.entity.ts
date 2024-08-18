@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { Student } from './../../students/entity/student.entity' ;
-import { studies } from './../../modules/entity/module.entity' ;
+import { _Module } from './../../modules/entity/module.entity' ;
 
 @Entity()
 export class Progress {
@@ -13,7 +13,7 @@ export class Progress {
     @ManyToOne(() => Student, student => student.progress)
     student: Student ;
 
-    @ManyToOne(() => studies.Module, module => module.progress)
+    @ManyToOne(() => _Module, module => module.progress)
     @JoinColumn()
-    module: studies.Module ;
+    module: _Module ;
 }

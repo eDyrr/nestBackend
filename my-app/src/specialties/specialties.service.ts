@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Specialties } from './entity/specialty.entity';
 import { Specialty } from './entity/specialty.entity';
 import { CreateSpecialtyDTO } from './dto/create-specialty.dto';
-import { studies } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/modules/entity/module.entity';
 
 @Injectable()
 export class SpecialtiesService {
@@ -58,7 +58,7 @@ export class SpecialtiesService {
         }
     }
 
-    async getModules(specialty_id: number): Promise<studies.Module[]> {
+    async getModules(specialty_id: number): Promise<_Module[]> {
         try {
             const specialty: Specialty = await this.getSpecialtyById(specialty_id) ;
             if(!specialty) {

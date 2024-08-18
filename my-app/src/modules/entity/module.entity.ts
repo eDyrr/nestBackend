@@ -4,9 +4,9 @@ import { Specialty } from 'src/specialties/entity/specialty.entity';
 import { Problem } from 'src/problems/entity/problem.entity';
 import { Progress } from './../../progress/entity/progress.entity' ;
 
-export namespace studies {
+//export namespace studies {
     @Entity()
-    export class Module {
+    export class _Module {
         @PrimaryGeneratedColumn()
         id: number ;
         
@@ -26,4 +26,4 @@ export namespace studies {
         @OneToMany(() => Progress, progress => progress.module)
         progress: Progress[] ;
     }
-}
+//}

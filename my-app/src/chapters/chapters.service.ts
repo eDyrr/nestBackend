@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Chapter } from './entity/chapter.entity';
 import { CreateChapterDto } from './dto/create-chapter.dto';
-import { studies } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/modules/entity/module.entity';
 import { ModulesService } from 'src/modules/modules.service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class ChaptersService {
 
     async createChapter(createdChapter: CreateChapterDto, module_id: number): Promise<Chapter> {
         try {
-            const module: studies.Module = await this.modulesService.getModuleById(module_id) ;
+            const module: _Module = await this.modulesService.getModuleById(module_id) ;
             if (!module) {
                 throw new Error(`module with ID: ${module_id} not found`) ;
             }

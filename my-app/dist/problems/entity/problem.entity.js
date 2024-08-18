@@ -38,9 +38,9 @@ __decorate([
     __metadata("design:type", Number)
 ], Problem.prototype, "difficulty", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => module_entity_1.studies.Module, module => module.problems),
+    (0, typeorm_1.ManyToOne)(() => module_entity_1._Module, module => module.problems),
     (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", module_entity_1.studies.Module)
+    __metadata("design:type", module_entity_1._Module)
 ], Problem.prototype, "module", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => solution_entity_1.Solution, solution => solution.problem),

@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from "class-validator";
 import { Difficulty } from "../entity/problem.entity";
-import { studies } from "src/modules/entity/module.entity";
+import { _Module } from "src/modules/entity/module.entity";
 import { Solution } from "src/solutions/entity/solution.entity";
 import { Type } from "class-transformer";
 
@@ -15,8 +15,8 @@ export class ProblemDTO {
 
     @IsNotEmpty()
     @ValidateNested()
-    @Type(() => studies.Module)
-    module: studies.Module ;
+    @Type(() => _Module)
+    module: _Module ;
 
     @IsOptional()
     @Type(() => Solution)

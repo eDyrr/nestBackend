@@ -29,9 +29,9 @@ __decorate([
     __metadata("design:type", student_entity_1.Student)
 ], Progress.prototype, "student", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => module_entity_1.studies.Module, module => module.progress),
+    (0, typeorm_1.ManyToOne)(() => module_entity_1._Module, module => module.progress),
     (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", module_entity_1.studies.Module)
+    __metadata("design:type", module_entity_1._Module)
 ], Progress.prototype, "module", void 0);
 exports.Progress = Progress = __decorate([
     (0, typeorm_1.Entity)()

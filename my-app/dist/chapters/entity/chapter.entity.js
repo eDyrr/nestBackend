@@ -32,9 +32,9 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Chapter.prototype, "is_paid", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => module_entity_1.studies.Module, module => module.chapters),
+    (0, typeorm_1.ManyToOne)(() => module_entity_1._Module, module => module.chapters),
     (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", module_entity_1.studies.Module)
+    __metadata("design:type", module_entity_1._Module)
 ], Chapter.prototype, "module", void 0);
 exports.Chapter = Chapter = __decorate([
     (0, typeorm_1.Entity)()

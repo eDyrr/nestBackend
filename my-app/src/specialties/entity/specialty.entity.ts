@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm' ;
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
-import { studies } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/modules/entity/module.entity';
 
 export const Specialties = {
     MATH: 'MATH',
@@ -29,6 +29,6 @@ export class Specialty {
     @JoinColumn()
     enrollments: Enrollment[] ;
 
-    @OneToMany(() => studies.Module, module => module.specialty)
-    modules: studies.Module[] ;
+    @OneToMany(() => _Module, module => module.specialty)
+    modules: _Module[] ;
 }

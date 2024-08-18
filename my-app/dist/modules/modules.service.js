@@ -56,7 +56,7 @@ let ModulesService = class ModulesService {
 exports.ModulesService = ModulesService;
 exports.ModulesService = ModulesService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(module_entity_1.studies.Module)),
+    __param(0, (0, typeorm_1.InjectRepository)(module_entity_1._Module)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ModulesService);
 //# sourceMappingURL=modules.service.js.map

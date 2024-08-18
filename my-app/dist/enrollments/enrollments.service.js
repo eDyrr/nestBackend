@@ -71,4 +71,5 @@ exports.EnrollmentsService = EnrollmentsService = __decorate([
         students_service_1.StudentsService,
         specialties_service_1.SpecialtiesService])
 ], EnrollmentsService);
+;
 //# sourceMappingURL=enrollments.service.js.map

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Student = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./../../users/entity/user.entity");
-const enrollment_entity_1 = require("../../enrollments/entity/enrollment.entity");
+const enrollment_entity_1 = require("../../entity/enrollment.entity");
 const progress_entity_1 = require("../../progress/entity/progress.entity");
 let Student = class Student extends user_entity_1.User {
 };

@@ -1,6 +1,6 @@
 import { Column, OneToOne, JoinColumn, Entity, OneToMany, ChildEntity } from "typeorm";
 import { User } from './../../users/entity/user.entity'
-import { Enrollment } from "src/enrollments/entity/enrollment.entity";
+import { Enrollment } from "src/entity/enrollment.entity";
 import { Progress } from "src/progress/entity/progress.entity";
 
 @ChildEntity()

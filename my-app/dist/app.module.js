@@ -19,9 +19,9 @@ const admin_entity_1 = require("./admins/entity/admin.entity");
 const student_entity_1 = require("./students/entity/student.entity");
 const progress_module_1 = require("./progress/progress.module");
 const modules_module_1 = require("./modules/modules.module");
-const enrollments_module_1 = require("./enrollments/enrollments.module");
 const problems_module_1 = require("./problems/problems.module");
 const admins_module_1 = require("./admins/admins.module");
+const enrollments_module_1 = require("./enrollments/enrollments.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;

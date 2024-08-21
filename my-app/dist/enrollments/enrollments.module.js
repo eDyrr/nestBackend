@@ -8,23 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EnrollmentsModule = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const enrollment_entity_1 = require("./entity/enrollment.entity");
-const enrollments_service_1 = require("./enrollments.service");
-const specialty_module_1 = require("../specialties/specialty.module");
-const students_module_1 = require("../students/students.module");
 let EnrollmentsModule = class EnrollmentsModule {
 };
 exports.EnrollmentsModule = EnrollmentsModule;
 exports.EnrollmentsModule = EnrollmentsModule = __decorate([
-    (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forFeature([enrollment_entity_1.Enrollment]),
-            specialty_module_1.SpecialtiesModule,
-            (0, common_1.forwardRef)(() => students_module_1.StudentsModule),
-        ],
-        providers: [enrollments_service_1.EnrollmentsService],
-        exports: [enrollments_service_1.EnrollmentsService],
-    })
+    (0, common_1.Module)({})
 ], EnrollmentsModule);
 //# sourceMappingURL=enrollments.module.js.map

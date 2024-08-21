@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Enrollment } from "./entity/enrollment.entity";
 import { Repository } from "typeorm";
-import { StudentsService } from "src/students/students.service";
+import { StudentsService } from "../../src/students/students.service";
 import { SpecialtiesService } from "src/specialties/specialties.service";
 import { Specialty } from "src/specialties/entity/specialty.entity";
 

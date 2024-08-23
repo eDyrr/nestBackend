@@ -15,7 +15,7 @@ export class EnrollmentsService {
         private readonly specialtiesService: SpecialtiesService,
     ) {}
 
-    async getSpecialtyId(studentId: number): Promise<Specialty> {
+    async getSpecialty(studentId: number): Promise<Specialty> {
         try {
             const enrollment = await this.enrollmentRepository.findOne({ 
                 where: { student: { id: studentId } },
@@ -35,7 +35,7 @@ export class EnrollmentsService {
 
     async enrollStudent(student_id: number, specialty_id: number): Promise<Enrollment> {
         try {
-            const student = await this.studentsService.findById(student_id) ;
+            const student = await this.studentsService.getStudentById(student_id) ;
             
             if(!student) {
                 throw new Error(`student with ID: ${student_id} not found`) ;

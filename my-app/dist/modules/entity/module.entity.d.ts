@@ -8,5 +8,5 @@ export declare class _Module {
     specialty: Specialty;
     chapters: Chapter[];
     problems: Problem[];
-    progress: Progress[];
+    progress: Progress;
 }

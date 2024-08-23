@@ -9,4 +9,5 @@ export declare class ProgressService {
     constructor(progressRepository: Repository<Progress>, studentsService: StudentsService, enrollmentsService: EnrollmentsService);
     init(student_id: number): Promise<void>;
     update(student_id: number, module_id: number): void;
+    getProgress(student_id: number, module_id: number): Promise<Progress>;
 }

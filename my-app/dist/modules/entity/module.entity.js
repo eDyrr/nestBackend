@@ -40,8 +40,8 @@ __decorate([
     __metadata("design:type", Array)
 ], _Module.prototype, "problems", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => progress_entity_1.Progress, progress => progress.module),
-    __metadata("design:type", Array)
+    (0, typeorm_1.OneToOne)(() => progress_entity_1.Progress),
+    __metadata("design:type", progress_entity_1.Progress)
 ], _Module.prototype, "progress", void 0);
 exports._Module = _Module = __decorate([
     (0, typeorm_1.Entity)()

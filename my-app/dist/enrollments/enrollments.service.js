@@ -25,7 +25,7 @@ let EnrollmentsService = class EnrollmentsService {
         this.studentsService = studentsService;
         this.specialtiesService = specialtiesService;
     }
-    async getSpecialtyId(studentId) {
+    async getSpecialty(studentId) {
         try {
             const enrollment = await this.enrollmentRepository.findOne({
                 where: { student: { id: studentId } },
@@ -45,7 +45,7 @@ let EnrollmentsService = class EnrollmentsService {
     }
     async enrollStudent(student_id, specialty_id) {
         try {
-            const student = await this.studentsService.findById(student_id);
+            const student = await this.studentsService.getStudentById(student_id);
             if (!student) {
                 throw new Error(`student with ID: ${student_id} not found`);
             }

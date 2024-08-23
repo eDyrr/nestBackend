@@ -27,7 +27,7 @@ let StudentsController = class StudentsController {
         return this.studentsService.findAll();
     }
     getStudentById(id) {
-        return this.studentsService.findById(id);
+        return this.studentsService.getStudentById(id);
     }
     getStudentScore(id) {
         return this.studentsService.getScore(id);

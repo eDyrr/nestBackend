@@ -27,11 +27,11 @@ let ProgressService = class ProgressService {
     }
     async init(student_id) {
         try {
-            const student = await this.studentsService.findById(student_id);
+            const student = await this.studentsService.getStudentById(student_id);
             if (!student) {
                 throw new Error(`student with ID: ${student_id} not found`);
             }
-            const specialty = await this.enrollmentsService.getSpecialtyId(student_id);
+            const specialty = await this.enrollmentsService.getSpecialty(student_id);
             if (!specialty) {
                 throw new Error(`specialty of student: ${student.firstName} not found`);
             }
@@ -47,6 +47,14 @@ let ProgressService = class ProgressService {
         }
     }
     update(student_id, module_id) {
+    }
+    async getProgress(student_id, module_id) {
+        try {
+            return await this.progressRepository.findOne({ where: { studentId: student_id, moduleId: module_id } });
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
     }
 };
 exports.ProgressService = ProgressService;

@@ -8,6 +8,6 @@ export declare class EnrollmentsService {
     private readonly studentsService;
     private readonly specialtiesService;
     constructor(enrollmentRepository: Repository<Enrollment>, studentsService: StudentsService, specialtiesService: SpecialtiesService);
-    getSpecialtyId(studentId: number): Promise<Specialty>;
+    getSpecialty(studentId: number): Promise<Specialty>;
     enrollStudent(student_id: number, specialty_id: number): Promise<Enrollment>;
 }

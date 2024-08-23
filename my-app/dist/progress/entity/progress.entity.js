@@ -17,20 +17,25 @@ let Progress = class Progress {
 };
 exports.Progress = Progress;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", Number)
-], Progress.prototype, "id", void 0);
+], Progress.prototype, "studentId", void 0);
+__decorate([
+    (0, typeorm_1.PrimaryColumn)(),
+    __metadata("design:type", Number)
+], Progress.prototype, "moduleId", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: 0 }),
     __metadata("design:type", Number)
 ], Progress.prototype, "progress", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => student_entity_1.Student, student => student.progress),
+    (0, typeorm_1.JoinColumn)({ name: 'studentId' }),
     __metadata("design:type", student_entity_1.Student)
 ], Progress.prototype, "student", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => module_entity_1._Module, module => module.progress),
-    (0, typeorm_1.JoinColumn)(),
+    (0, typeorm_1.JoinColumn)({ name: 'moduleId' }),
     __metadata("design:type", module_entity_1._Module)
 ], Progress.prototype, "module", void 0);
 exports.Progress = Progress = __decorate([

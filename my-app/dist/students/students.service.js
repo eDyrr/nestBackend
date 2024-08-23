@@ -19,11 +19,13 @@ const student_entity_1 = require("./entity/student.entity");
 const typeorm_2 = require("typeorm");
 const enrollments_service_1 = require("../enrollments/enrollments.service");
 const specialties_service_1 = require("../specialties/specialties.service");
+const progress_service_1 = require("../progress/progress.service");
 let StudentsService = class StudentsService {
-    constructor(studentRepository, enrollmentsService, specialtiesService) {
+    constructor(studentRepository, enrollmentsService, specialtiesService, progressService) {
         this.studentRepository = studentRepository;
         this.enrollmentsService = enrollmentsService;
         this.specialtiesService = specialtiesService;
+        this.progressService = progressService;
     }
     async createStudent(studentDTO) {
         try {
@@ -48,12 +50,12 @@ let StudentsService = class StudentsService {
     async findAll() {
         return await this.studentRepository.find();
     }
-    findById(id) {
+    getStudentById(id) {
         return this.studentRepository.findOneBy({ id });
     }
     async subscribe(id) {
         try {
-            const student = await this.findById(id);
+            const student = await this.getStudentById(id);
             if (!student) {
                 throw new Error(`student with ${id} not found`);
             }
@@ -66,7 +68,7 @@ let StudentsService = class StudentsService {
     }
     async unsubscribe(id) {
         try {
-            const student = await this.findById(id);
+            const student = await this.getStudentById(id);
             if (!student) {
                 throw new Error(`student with ID: ${id} not found`);
             }
@@ -79,7 +81,7 @@ let StudentsService = class StudentsService {
     }
     async getScore(id) {
         try {
-            const student = await this.findById(id);
+            const student = await this.getStudentById(id);
             return student.score;
         }
         catch (error) {
@@ -89,7 +91,7 @@ let StudentsService = class StudentsService {
     }
     async addScore(id, score) {
         try {
-            const student = await this.findById(id);
+            const student = await this.getStudentById(id);
             if (!student) {
                 throw new Error(`student with ${id} isnt found`);
             }
@@ -103,11 +105,11 @@ let StudentsService = class StudentsService {
     }
     async getSpecialty(student_id) {
         try {
-            const student = await this.findById(student_id);
+            const student = await this.getStudentById(student_id);
             if (!student) {
                 throw new Error(`student with ID: ${student_id} not found`);
             }
-            const specialty = await this.enrollmentsService.getSpecialtyId(student_id);
+            const specialty = await this.enrollmentsService.getSpecialty(student_id);
             return await this.specialtiesService.getSpecialtyById(specialty.id);
         }
         catch (error) {
@@ -116,7 +118,7 @@ let StudentsService = class StudentsService {
     }
     async getProgress(student_id) {
         try {
-            const student = await this.findById(student_id);
+            const student = await this.getStudentById(student_id);
             if (!student) {
                 throw new Error(`student with ID: ${student_id} not found`);
             }
@@ -130,6 +132,25 @@ let StudentsService = class StudentsService {
             throw new Error(error.message);
         }
     }
+    async getModuleProgress(student_id, module_id) {
+        try {
+            const student = await this.getStudentById(student_id);
+            if (!student) {
+                throw new Error(`student with ID: ${student_id} not found`);
+            }
+            const specialty = await this.enrollmentsService.getSpecialty(student_id);
+            if (!specialty) {
+                throw new Error(`specialty with student_ID: ${student_id} not found`);
+            }
+            const modules = await specialty.modules;
+            const _module = await modules.find(m => m.id === module_id);
+            const progress = await this.progressService.getProgress(student.id, _module.id);
+            return progress.progress;
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }
 };
 exports.StudentsService = StudentsService;
 exports.StudentsService = StudentsService = __decorate([
@@ -137,6 +158,7 @@ exports.StudentsService = StudentsService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(student_entity_1.Student)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         enrollments_service_1.EnrollmentsService,
-        specialties_service_1.SpecialtiesService])
+        specialties_service_1.SpecialtiesService,
+        progress_service_1.ProgressService])
 ], StudentsService);
 //# sourceMappingURL=students.service.js.map

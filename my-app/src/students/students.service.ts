@@ -6,7 +6,10 @@ import { CreateStudentDto } from './dto/create-student.dto';
 import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
 import { Specialty } from 'src/specialties/entity/specialty.entity';
-
+import { _Module } from 'src/modules/entity/module.entity';
+import { ModulesService } from 'src/modules/modules.service';
+import { ProgressService } from 'src/progress/progress.service';
+import { Progress } from 'src/progress/entity/progress.entity';
 
 @Injectable()
 export class StudentsService {
@@ -15,6 +18,7 @@ export class StudentsService {
     private readonly studentRepository: Repository<Student>,
     private readonly enrollmentsService: EnrollmentsService,
     private readonly specialtiesService: SpecialtiesService,
+    private readonly progressService: ProgressService,
   ) {}
 
   async createStudent(studentDTO: CreateStudentDto): Promise<Student> {
@@ -47,13 +51,13 @@ export class StudentsService {
     return await this.studentRepository.find();
   }
 
-  findById(id: number): Promise<Student> {
+  getStudentById(id: number): Promise<Student> {
     return this.studentRepository.findOneBy({ id });
   }
 
   async subscribe(id: number): Promise<void> {
     try {
-      const student: Student = await this.findById(id);
+      const student: Student = await this.getStudentById(id);
 
       if (!student) {
         throw new Error(`student with ${id} not found`);
@@ -68,7 +72,7 @@ export class StudentsService {
 
   async unsubscribe(id: number): Promise<void> {
     try {
-      const student: Student = await this.findById(id);
+      const student: Student = await this.getStudentById(id);
 
       if (!student) {
         throw new Error(`student with ID: ${id} not found`);
@@ -83,7 +87,7 @@ export class StudentsService {
 
   async getScore(id: number): Promise<number> {
     try {
-      const student = await this.findById(id);
+      const student = await this.getStudentById(id);
       return student.score;
     } catch (error) {
       console.error(error);
@@ -93,7 +97,7 @@ export class StudentsService {
 
   async addScore(id: number, score: number): Promise<void> {
     try {
-      const student: Student = await this.findById(id);
+      const student: Student = await this.getStudentById(id);
 
       if (!student) {
         throw new Error(`student with ${id} isnt found`);
@@ -110,13 +114,13 @@ export class StudentsService {
 
   async getSpecialty(student_id: number): Promise<Specialty> {
     try {
-      const student = await this.findById(student_id) ;
+      const student = await this.getStudentById(student_id) ;
 
       if(!student) {
         throw new Error(`student with ID: ${student_id} not found`) ;
       }
 
-      const specialty = await this.enrollmentsService.getSpecialtyId(student_id) ;
+      const specialty = await this.enrollmentsService.getSpecialty(student_id) ;
 
       return await this.specialtiesService.getSpecialtyById(specialty.id) ;
     } catch(error) {
@@ -126,7 +130,7 @@ export class StudentsService {
 
   async getProgress(student_id: number): Promise<number> {
     try {
-      const student: Student = await this.findById(student_id) ;
+      const student: Student = await this.getStudentById(student_id) ;
       if(!student) {
         throw new Error(`student with ID: ${student_id} not found`) ;
       }
@@ -138,6 +142,32 @@ export class StudentsService {
       }
 
       return 
+    } catch(error) {
+      throw new Error(error.message) ;
+    }
+  }
+
+  async getModuleProgress(student_id: number, module_id: number): Promise<number> {
+    try {
+      const student: Student = await this.getStudentById(student_id) ;
+
+      if(!student) {
+        throw new Error(`student with ID: ${student_id} not found`) ;
+      }
+
+      const specialty: Specialty | null = await this.enrollmentsService.getSpecialty(student_id) ;
+      if(!specialty) {
+        throw new Error(`specialty with student_ID: ${student_id} not found`) ;
+      }
+
+      const modules: _Module[] = await specialty.modules ; 
+
+      const _module: _Module = await modules.find(m => m.id === module_id) ;
+      
+      const progress: Progress = await this.progressService.getProgress(student.id, _module.id) ;
+      return progress.progress ;
+
+      
     } catch(error) {
       throw new Error(error.message) ;
     }

@@ -18,7 +18,7 @@ export class StudentsController {
 
     @Get(':id')
     getStudentById(@Param('id') id: number) {
-        return this.studentsService.findById(id) ;
+        return this.studentsService.getStudentById(id) ;
     }
 
     @Get(':id')

@@ -23,7 +23,7 @@ import { Progress } from './../../progress/entity/progress.entity' ;
         @OneToMany(() => Problem, problem => problem.module)
         problems: Problem[] ;
         
-        @OneToMany(() => Progress, progress => progress.module)
-        progress: Progress[] ;
+        @OneToOne(() => Progress)
+        progress: Progress ;
     }
 //}

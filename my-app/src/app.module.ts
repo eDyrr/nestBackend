@@ -13,6 +13,13 @@ import { _ModulesModule } from './modules/modules.module';
 import { ProblemsModule } from './problems/problems.module';
 import { AdminsModule } from './admins/admins.module';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { Chapter } from './chapters/entity/chapter.entity';
+import { _Module } from './modules/entity/module.entity';
+import { Problem } from './problems/entity/problem.entity';
+import { Solution } from './solutions/entity/solution.entity';
+import { Specialty } from './specialties/entity/specialty.entity';
+import { Progress } from './progress/entity/progress.entity';
+import { Enrollment } from './enrollments/entity/enrollment.entity';
 
 @Module({
   imports: [
@@ -23,7 +30,7 @@ import { EnrollmentsModule } from './enrollments/enrollments.module';
       username: 'eDD',
       password: '7355608',
       database: 'bac',
-      entities: [User, Admin, Student],
+      entities: [User, Admin, Student, Chapter, _Module, Problem, Solution, Specialty, Progress, Enrollment],
       synchronize: true,
     }),
     StudentsModule, SpecialtiesModule, ChaptersModule, ProgressModule, _ModulesModule, EnrollmentsModule, ProblemsModule, AdminsModule],

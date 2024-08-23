@@ -1,11 +1,11 @@
-import { Column, OneToOne, JoinColumn, Entity, OneToMany, ChildEntity } from "typeorm";
+import { Column, OneToOne, JoinColumn, OneToMany, ChildEntity } from "typeorm";
 import { User } from './../../users/entity/user.entity'
-import { Enrollment } from "src/entity/enrollment.entity";
+import { Enrollment } from "../../enrollments/entity/enrollment.entity";
 import { Progress } from "src/progress/entity/progress.entity";
 
 @ChildEntity()
-export class Student extends User{
-    @Column()
+export class Student extends User {
+    @Column({ default: false })
     subscriber: boolean ;
     
     @Column({ default: 0 })

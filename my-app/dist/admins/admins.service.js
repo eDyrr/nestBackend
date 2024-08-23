@@ -8,18 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Admin = void 0;
-const typeorm_1 = require("typeorm");
-const user_entity_1 = require("../../users/entity/user.entity");
-let Admin = class Admin extends user_entity_1.User {
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
-exports.Admin = Admin;
-__decorate([
-    (0, typeorm_1.Column)('simple-array'),
-    __metadata("design:type", Array)
-], Admin.prototype, "permissions", void 0);
-exports.Admin = Admin = __decorate([
-    (0, typeorm_1.ChildEntity)()
-], Admin);
-//# sourceMappingURL=admin.entity.js.map
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminsService = void 0;
+const common_1 = require("@nestjs/common");
+const admin_entity_1 = require("./entity/admin.entity");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+let AdminsService = class AdminsService {
+    constructor(adminRepository) {
+        this.adminRepository = adminRepository;
+    }
+};
+exports.AdminsService = AdminsService;
+exports.AdminsService = AdminsService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(admin_entity_1.Admin)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
+], AdminsService);
+//# sourceMappingURL=admins.service.js.map

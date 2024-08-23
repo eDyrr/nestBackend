@@ -8,15 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminsModule = void 0;
 const common_1 = require("@nestjs/common");
-const user_entity_1 = require("../users/entity/user.entity");
 let AdminsModule = class AdminsModule {
 };
 exports.AdminsModule = AdminsModule;
 exports.AdminsModule = AdminsModule = __decorate([
-    (0, common_1.Module)({
-        imports: [(0, common_1.forwardRef)(() => user_entity_1.User)],
-        controllers: [],
-        providers: [],
-    })
+    (0, common_1.Module)({})
 ], AdminsModule);
 //# sourceMappingURL=admins.module.js.map

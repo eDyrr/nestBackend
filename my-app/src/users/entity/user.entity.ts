@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, TableInheritance } from "typeorm";
-import { Student } from "../../students/entity/student.entity";
-import { Admin } from '../../admins/entity/admin.entity' ;
+// import { Student } from "../../students/entity/student.entity";
+// import { Admin } from '../../admins/entity/admin.entity' ;
 
 export enum Role {
     STUDENT = "STUDENT",
@@ -31,9 +31,9 @@ export class User {
     })
     role: Role ;
 
-    @OneToOne(() => Student, { nullable: true })
-    @JoinColumn()
-    student?: Student ;
+    // @OneToOne(() => Student, { nullable: true })
+    // @JoinColumn()
+    // student?: Student ;
 
     // @OneToOne(() => Admin, { nullable: true })
     // @JoinColumn()

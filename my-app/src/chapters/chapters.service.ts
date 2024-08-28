@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Chapter } from './entity/chapter.entity';
 import { CreateChapterDto } from './dto/create-chapter.dto';
-import { _Module } from 'src/modules/entity/module.entity';
-import { ModulesService } from 'src/modules/modules.service';
+import { _Module } from 'src/_modules/entity/module.entity';
+import { ModulesService } from 'src/_modules/_modules.service';
 
 @Injectable()
 export class ChaptersService {

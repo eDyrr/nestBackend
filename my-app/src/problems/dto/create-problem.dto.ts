@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, ValidateNested } from "class-validator";
 import { Difficulty } from "../entity/problem.entity";
-import { _Module } from "src/modules/entity/module.entity";
+import { _Module } from "src/_modules/entity/module.entity";
 import { Solution } from "src/solutions/entity/solution.entity";
 import { Type } from "class-transformer";
 

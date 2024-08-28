@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Student } from './../../students/entity/student.entity' ;
-import { _Module } from './../../modules/entity/module.entity' ;
+import { _Module } from './../../_modules/entity/module.entity' ;
 
 @Entity()
 export class Progress {

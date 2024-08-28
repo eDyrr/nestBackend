@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { Solution } from "../../solutions/entity/solution.entity";
-import { _Module } from "src/modules/entity/module.entity";
+import { _Module } from "src/_modules/entity/module.entity";
 
 export enum Difficulty {
     easy,

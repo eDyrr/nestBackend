@@ -6,10 +6,10 @@ import { CreateStudentDto } from './dto/create-student.dto';
 import { EnrollmentsService } from 'src/enrollments/enrollments.service';
 import { SpecialtiesService } from 'src/specialties/specialties.service';
 import { Specialty } from 'src/specialties/entity/specialty.entity';
-import { _Module } from 'src/modules/entity/module.entity';
-import { ModulesService } from 'src/modules/modules.service';
+import { _Module } from 'src/_modules/entity/module.entity';
+import { ModulesService } from 'src/_modules/_modules.service';
 import { ProgressService } from 'src/progress/progress.service';
-import { Progress } from 'src/progress/entity/progress.entity';
+import { Progress } from '../progress/entity/progress.entity';
 
 @Injectable()
 export class StudentsService {

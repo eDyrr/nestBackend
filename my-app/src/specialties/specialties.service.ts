@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Specialties } from './entity/specialty.entity';
 import { Specialty } from './entity/specialty.entity';
 import { CreateSpecialtyDTO } from './dto/create-specialty.dto';
-import { _Module } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/_modules/entity/module.entity';
 
 @Injectable()
 export class SpecialtiesService {

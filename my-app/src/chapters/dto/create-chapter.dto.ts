@@ -5,7 +5,7 @@ import {
     IsString,
     ValidateNested
 } from 'class-validator'
-import { _Module } from './../../modules/entity/module.entity' ;
+import { _Module } from './../../_modules/entity/module.entity' ;
 import { Type } from 'class-transformer';
 
 

@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm' ;
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
-import { _Module } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/_modules/entity/module.entity';
 
 export const Specialties = {
     MATH: 'MATH',

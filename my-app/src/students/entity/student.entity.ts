@@ -1,5 +1,5 @@
 import { Column, OneToOne, JoinColumn, OneToMany, ChildEntity } from "typeorm";
-import { User } from './../../users/entity/user.entity'
+import { User } from 'src/users/entity/user.entity'
 import { Enrollment } from "../../enrollments/entity/enrollment.entity";
 import { Progress } from "src/progress/entity/progress.entity";
 

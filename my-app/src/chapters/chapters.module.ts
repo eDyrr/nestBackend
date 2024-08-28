@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { _ModulesModule } from 'src/modules/modules.module';
+import { ModulesModule } from 'src/_modules/_modules.module';
 
 @Module({
-    imports:[forwardRef(() => _ModulesModule)]
+    imports:[forwardRef(() => ModulesModule)]
 })
 export class ChaptersModule {}

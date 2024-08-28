@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { Chapter } from './entity/chapter.entity';
 import { CreateChapterDto } from './dto/create-chapter.dto';
-import { ModulesService } from 'src/modules/modules.service';
+import { ModulesService } from 'src/_modules/_modules.service';
 export declare class ChaptersService {
     private readonly chapterRepository;
     private readonly modulesService;

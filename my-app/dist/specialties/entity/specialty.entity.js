@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Specialty = exports.Specialties = void 0;
 const typeorm_1 = require("typeorm");
 const enrollment_entity_1 = require("../../enrollments/entity/enrollment.entity");
-const module_entity_1 = require("../../modules/entity/module.entity");
+const module_entity_1 = require("../../_modules/entity/module.entity");
 exports.Specialties = {
     MATH: 'MATH',
     SCIENCE: 'SCIENCE',

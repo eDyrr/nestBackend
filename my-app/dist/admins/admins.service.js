@@ -21,6 +21,8 @@ let AdminsService = class AdminsService {
     constructor(adminRepository) {
         this.adminRepository = adminRepository;
     }
+    async deleteModule(moduleId) { }
+    deleteChapter() { }
 };
 exports.AdminsService = AdminsService;
 exports.AdminsService = AdminsService = __decorate([

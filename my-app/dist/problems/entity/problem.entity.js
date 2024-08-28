@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Problem = exports.Difficulty = void 0;
 const typeorm_1 = require("typeorm");
 const solution_entity_1 = require("../../solutions/entity/solution.entity");
-const module_entity_1 = require("../../modules/entity/module.entity");
+const module_entity_1 = require("../../_modules/entity/module.entity");
 var Difficulty;
 (function (Difficulty) {
     Difficulty[Difficulty["easy"] = 0] = "easy";

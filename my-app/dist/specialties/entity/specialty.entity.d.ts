@@ -1,5 +1,5 @@
 import { Enrollment } from 'src/enrollments/entity/enrollment.entity';
-import { _Module } from 'src/modules/entity/module.entity';
+import { _Module } from 'src/_modules/entity/module.entity';
 export declare const Specialties: {
     readonly MATH: "MATH";
     readonly SCIENCE: "SCIENCE";

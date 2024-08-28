@@ -59,4 +59,4 @@ exports.ModulesService = ModulesService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(module_entity_1._Module)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ModulesService);
-//# sourceMappingURL=modules.service.js.map
+//# sourceMappingURL=_modules.service.js.map

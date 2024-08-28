@@ -17,7 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const chapter_entity_1 = require("./entity/chapter.entity");
-const modules_service_1 = require("../modules/modules.service");
+const _modules_service_1 = require("../_modules/_modules.service");
 let ChaptersService = class ChaptersService {
     constructor(chapterRepository, modulesService) {
         this.chapterRepository = chapterRepository;
@@ -64,6 +64,6 @@ exports.ChaptersService = ChaptersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(chapter_entity_1.Chapter)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
-        modules_service_1.ModulesService])
+        _modules_service_1.ModulesService])
 ], ChaptersService);
 //# sourceMappingURL=chapters.service.js.map

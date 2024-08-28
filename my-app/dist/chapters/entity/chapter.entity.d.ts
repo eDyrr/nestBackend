@@ -1,4 +1,4 @@
-import { _Module } from './../../modules/entity/module.entity';
+import { _Module } from './../../_modules/entity/module.entity';
 export declare class Chapter {
     id: number;
     title: string;

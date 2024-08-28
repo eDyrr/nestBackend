@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Progress = void 0;
 const typeorm_1 = require("typeorm");
 const student_entity_1 = require("./../../students/entity/student.entity");
-const module_entity_1 = require("./../../modules/entity/module.entity");
+const module_entity_1 = require("./../../_modules/entity/module.entity");
 let Progress = class Progress {
 };
 exports.Progress = Progress;
